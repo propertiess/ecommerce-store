@@ -1,5 +1,5 @@
 import { PropsWithChildren } from 'react';
-import { Flex, Footer, Header } from '@mantine/core';
+import { Flex, Footer, Header, Text } from '@mantine/core';
 import Head from 'next/head';
 
 import { Logo } from '@/components/Logo';
@@ -30,7 +30,9 @@ export const Layout = ({ title, description, children }: Props) => {
       </Header>
       <main className='flex-grow'>{children}</main>
       <Footer height='auto' p='xs'>
-        footer
+        <Text className='text-center'>
+          Shop &copy; 2023. Все права защищены.
+        </Text>
       </Footer>
     </>
   );
