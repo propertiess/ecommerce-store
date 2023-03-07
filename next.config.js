@@ -4,6 +4,9 @@ const nextConfig = {
   swcMinify: true,
   env: {
     API_URL: process.env.API_URL
+  },
+  images: {
+    domains: ['fakestoreapi.com']
   }
 };
 

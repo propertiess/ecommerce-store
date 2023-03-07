@@ -6,7 +6,13 @@ import type { AppProps } from 'next/app';
 
 import '@/styles/globals.css';
 
-export const queryClient = new QueryClient();
+export const queryClient = new QueryClient({
+  defaultOptions: {
+    queries: {
+      refetchOnWindowFocus: false
+    }
+  }
+});
 
 const App = ({ Component, pageProps }: AppProps) => {
   useEffect(() => {
