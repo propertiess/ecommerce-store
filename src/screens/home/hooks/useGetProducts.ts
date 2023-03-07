@@ -2,6 +2,7 @@ import { useQuery } from '@tanstack/react-query';
 import { queryClient } from 'pages/_app';
 
 import { ProductService } from '@/services/product/product.service';
+import { Product } from '@/types';
 import { QueryKeys } from '@/utils/consts';
 
 export const useGetProducts = () => {
@@ -12,5 +13,5 @@ export const useGetProducts = () => {
 };
 
 export const useProductsData = () => {
-  return queryClient.getQueryData([QueryKeys.products]);
+  return queryClient.getQueryData<Product[]>([QueryKeys.products]);
 };
