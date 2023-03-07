@@ -15,7 +15,13 @@ const App = ({ Component, pageProps }: AppProps) => {
 
   return (
     <QueryClientProvider client={queryClient}>
-      <MantineProvider withGlobalStyles withNormalizeCSS>
+      <MantineProvider
+        withGlobalStyles
+        withNormalizeCSS
+        theme={{
+          fontFamily: `'Rubik', sans-serif`
+        }}
+      >
         <Component {...pageProps} />
       </MantineProvider>
       <ReactQueryDevtools />

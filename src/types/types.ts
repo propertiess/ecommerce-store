@@ -5,3 +5,8 @@ export type Product = {
   description: string;
   image: string;
 };
+
+export type TLink = {
+  title: string;
+  href: string;
+};

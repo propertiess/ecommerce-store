@@ -1,6 +1,10 @@
 import { PropsWithChildren } from 'react';
-import { Footer, Header } from '@mantine/core';
+import { Flex, Footer, Header } from '@mantine/core';
 import Head from 'next/head';
+
+import { Logo } from '@/components/Logo';
+
+import { links, Navbar } from './navbar';
 
 type Props = PropsWithChildren & {
   title: string;
@@ -19,7 +23,10 @@ export const Layout = ({ title, description, children }: Props) => {
         )}
       </Head>
       <Header height='auto' p='xs'>
-        header
+        <Flex align='center' justify='space-between'>
+          <Logo />
+          <Navbar links={links} />
+        </Flex>
       </Header>
       <main className='flex-grow'>{children}</main>
       <Footer height='auto' p='xs'>

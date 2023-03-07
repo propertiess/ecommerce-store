@@ -4,9 +4,3 @@
 #__next {
   @apply min-h-screen flex flex-col;
 }
-
-
-a {
-  color: inherit;
-  text-decoration: none;
-}
