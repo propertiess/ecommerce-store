@@ -12,7 +12,11 @@ export const Navbar = ({ links }: Props) => {
   const router = useRouter();
 
   return (
-    <MantineNavbar className='m-0 mr-32 w-fit border-0'>
+    <MantineNavbar
+      className='mr-32 w-fit border-0'
+      hiddenBreakpoint='sm'
+      hidden={true}
+    >
       <List className='flex gap-10' listStyleType='none'>
         {links.map(link => (
           <List.Item key={link.title}>
