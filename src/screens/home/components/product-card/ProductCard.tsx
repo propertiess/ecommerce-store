@@ -28,10 +28,8 @@ export const ProductCard = ({ product }: Props) => {
         {product.title.length > 'Mens Casual Slim Fit'.length ? (
           <Tooltip label={product.title} withinPortal>
             <Text weight={500}>
-              {product.title
-                .split('')
-                .slice(0, 'Mens Casual Slim Fit'.length - 3)
-                .join('') + '...'}
+              {product.title.slice(0, 'Mens Casual Slim Fit'.length - 3) +
+                '...'}
             </Text>
           </Tooltip>
         ) : (
