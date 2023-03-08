@@ -1,3 +1,3 @@
 module.exports = {
-  '*.{js,jsx,ts,tsx}': ['pnpm lint', 'pnpm format']
+  '*.{js,jsx,ts,tsx}': ['pnpm lint --fix', 'pnpm format']
 };

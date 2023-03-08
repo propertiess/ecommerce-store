@@ -7,6 +7,6 @@ export const links: TLink[] = [
   },
   {
     title: 'Вход',
-    href: '/#'
+    href: '/authorization'
   }
 ];

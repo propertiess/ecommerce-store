@@ -8,7 +8,7 @@ specifiers:
   '@mantine/form': ^6.0.1
   '@mantine/hooks': ^6.0.0
   '@mantine/notifications': ^6.0.1
-  '@propertiess/eslint-config': ^1.0.3
+  '@propertiess/eslint-config': ^1.0.4
   '@propertiess/prettier-config': ^1.1.0
   '@tabler/icons-react': ^2.8.0
   '@tanstack/react-query': ^4.26.1
@@ -52,8 +52,8 @@ dependencies:
 devDependencies:
   '@commitlint/cli': 17.4.4
   '@commitlint/config-conventional': 17.4.4
-  '@propertiess/eslint-config': 1.0.3_gvwvyyz6pbpdons5ebatsgboxq
-  '@propertiess/prettier-config': 1.1.0_4jwvo6isnunihkuuzkutqshnku
+  '@propertiess/eslint-config': 1.0.4_gvwvyyz6pbpdons5ebatsgboxq
+  '@propertiess/prettier-config': 1.1.0_ilpp7gznvnymfk4xahpv2fgfpi
   '@tanstack/react-query-devtools': 4.26.1_brdhmlf72zuns3lsk66phyptty
   '@testing-library/jest-dom': 5.16.5
   '@testing-library/react': 14.0.0_biqbaboplfbrettd7655fr4n2y
@@ -1239,8 +1239,8 @@ packages:
       fastq: 1.15.0
     dev: true
 
-  /@propertiess/eslint-config/1.0.3_gvwvyyz6pbpdons5ebatsgboxq:
-    resolution: {integrity: sha512-/a5TF7KvGO7hlNn+GL7q3ro9ha41DeTD4s32RYeHHeUoaJkwDEK9aqeF/E8SGqy5hdYcdnYRkuZe1Z7aKv057w==}
+  /@propertiess/eslint-config/1.0.4_gvwvyyz6pbpdons5ebatsgboxq:
+    resolution: {integrity: sha512-m1/WhqsWgNTZdu5Ej9bg1FGeoHYlR1Sa+DYMxUEsBvZHqRmT0S7BlMRA/y0vZxMigxfC1VjZ0rOl90crOWNXjw==}
     peerDependencies:
       '@typescript-eslint/eslint-plugin': 5.49.0
       '@typescript-eslint/parser': 5.49.0
@@ -1257,14 +1257,14 @@ packages:
       eslint-plugin-simple-import-sort: 10.0.0_eslint@8.32.0
     dev: true
 
-  /@propertiess/prettier-config/1.1.0_4jwvo6isnunihkuuzkutqshnku:
+  /@propertiess/prettier-config/1.1.0_ilpp7gznvnymfk4xahpv2fgfpi:
     resolution: {integrity: sha512-JoptxdEOPUB5udp7QDT6x9OSmAYub+PqyKhMVk50Gyfx6ZEFFm8fEdNaXsz6bDM9IYeHjObJUnfHRBcyhYtl6g==}
     peerDependencies:
       prettier: ^2.8.3
       prettier-plugin-tailwindcss: ^0.2.2
     dependencies:
       prettier: 2.8.4
-      prettier-plugin-tailwindcss: 0.2.3_prettier@2.8.4
+      prettier-plugin-tailwindcss: 0.2.4_prettier@2.8.4
     dev: true
 
   /@radix-ui/number/1.0.0:
@@ -2963,7 +2963,7 @@ packages:
       eslint-utils: 3.0.0_eslint@8.32.0
       eslint-visitor-keys: 3.3.0
       espree: 9.4.1
-      esquery: 1.4.2
+      esquery: 1.5.0
       esutils: 2.0.3
       fast-deep-equal: 3.1.3
       file-entry-cache: 6.0.1
@@ -3007,8 +3007,8 @@ packages:
     hasBin: true
     dev: true
 
-  /esquery/1.4.2:
-    resolution: {integrity: sha512-JVSoLdTlTDkmjFmab7H/9SL9qGSyjElT3myyKp7krqjVFQCDLmj1QFaCLRFBszBKI0XVZaiiXvuPIX3ZwHe1Ng==}
+  /esquery/1.5.0:
+    resolution: {integrity: sha512-YQLXUplAwJgCydQ78IMJywZCceoqk1oH01OERdSAJc/7U2AylwjhSCLDEtqwg811idIS/9fIU5GjG73IgjKMVg==}
     engines: {node: '>=0.10'}
     dependencies:
       estraverse: 5.3.0
@@ -5121,8 +5121,8 @@ packages:
     engines: {node: '>= 0.8.0'}
     dev: true
 
-  /prettier-plugin-tailwindcss/0.2.3_prettier@2.8.4:
-    resolution: {integrity: sha512-s2N5Dh7Ao5KTV1mao5ZBnn8EKtUcDPJEkGViZIjI0Ij9TTI5zgTz4IHOxW33jOdjHKa8CSjM88scelUiC5TNRQ==}
+  /prettier-plugin-tailwindcss/0.2.4_prettier@2.8.4:
+    resolution: {integrity: sha512-wMyugRI2yD8gqmMpZSS8kTA0gGeKozX/R+w8iWE+yiCZL09zY0SvfiHfHabNhjGhzxlQ2S2VuTxPE3T72vppCQ==}
     engines: {node: '>=12.17.0'}
     peerDependencies:
       '@ianvs/prettier-plugin-sort-imports': '*'
