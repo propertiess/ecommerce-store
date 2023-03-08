@@ -4,11 +4,18 @@ import { queryClient } from 'pages/_app';
 import { ProductService } from '@/services/product/product.service';
 import { Product } from '@/types';
 import { QueryKeys } from '@/utils/consts';
+import { showErrorNotification } from '@/utils/helpers/notifications';
 
 export const useGetProducts = () => {
   return useQuery({
     queryKey: [QueryKeys.products],
-    queryFn: () => ProductService.getAll()
+    queryFn: async () => {
+      try {
+        return await ProductService.getAll();
+      } catch (e) {
+        e instanceof Error && showErrorNotification(e.message);
+      }
+    }
   });
 };
 
@@ -21,18 +28,15 @@ export const useMutationProducts = () => {
   });
 
   const { mutateAsync: putProducts } = useMutation({
-    mutationFn: (updateProduct: Product) => {
-      return ProductService.put(updateProduct);
-    },
+    mutationFn: (updateProduct: Product) => ProductService.put(updateProduct),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: [QueryKeys.products] });
     }
   });
 
   const { mutateAsync: postProducts } = useMutation({
-    mutationFn: (newProduct: Omit<Product, 'id'>) => {
-      return ProductService.post(newProduct);
-    },
+    mutationFn: (newProduct: Omit<Product, 'id'>) =>
+      ProductService.post(newProduct),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: [QueryKeys.products] });
     }

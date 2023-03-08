@@ -1,13 +1,8 @@
-import { useState } from 'react';
 import { Button, Drawer, Group, Table } from '@mantine/core';
-import { useDisclosure } from '@mantine/hooks';
 import { IconEdit, IconTrash } from '@tabler/icons-react';
 
 import { ProductsCrudForm } from '@/screens/admin/components/forms/ProductsCrudForm';
-import {
-  useGetProducts,
-  useMutationProducts
-} from '@/screens/home/hooks/useGetProducts';
+import { useProductsCrudTable } from '@/screens/admin/hooks/useProductsCrudTable';
 import { Product } from '@/types';
 
 const productKeys: (keyof Product)[] = [
@@ -19,25 +14,17 @@ const productKeys: (keyof Product)[] = [
 ];
 
 export const ProductsCrudTable = () => {
-  const [choiceProduct, setChoiceProduct] = useState<Product | null>(null);
-  const [opened, { close, open }] = useDisclosure(false);
-
-  const [operation, setOperation] = useState<'post' | 'put'>();
-
-  const { data: products } = useGetProducts();
-  const { postProducts, putProducts, deleteProducts } = useMutationProducts();
-
-  const changeRow = (p: Product) => {
-    setChoiceProduct(p);
-    setOperation('put');
-    open();
-  };
-
-  const addRow = () => {
-    open();
-    setChoiceProduct(null);
-    setOperation('post');
-  };
+  const {
+    products,
+    choiceProduct,
+    operation,
+    isDrawerOpen,
+    addRow,
+    changeRow,
+    onSave,
+    onDelete,
+    close
+  } = useProductsCrudTable();
 
   return (
     <>
@@ -73,7 +60,7 @@ export const ProductsCrudTable = () => {
                   />
                   <IconTrash
                     className='cursor-pointer'
-                    onClick={() => deleteProducts(product.id)}
+                    onClick={() => onDelete(product.id)}
                   />
                 </Group>
               </td>
@@ -82,7 +69,7 @@ export const ProductsCrudTable = () => {
         </tbody>
       </Table>
       <Drawer
-        opened={opened}
+        opened={isDrawerOpen}
         onClose={close}
         zIndex={1002}
         title={
@@ -90,22 +77,7 @@ export const ProductsCrudTable = () => {
         }
         position='right'
       >
-        <ProductsCrudForm
-          product={choiceProduct}
-          onSave={async product => {
-            switch (operation) {
-              case 'post': {
-                await postProducts(product);
-                break;
-              }
-
-              case 'put': {
-                await putProducts(product as Product);
-                break;
-              }
-            }
-          }}
-        />
+        <ProductsCrudForm product={choiceProduct} onSave={onSave} />
       </Drawer>
     </>
   );
