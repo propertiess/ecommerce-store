@@ -3,7 +3,7 @@ import {
   Anchor,
   Box,
   Button,
-  Flex,
+  Group,
   PasswordInput,
   TextInput
 } from '@mantine/core';
@@ -31,8 +31,10 @@ const Authorization = () => {
   return (
     <Layout title='Авторизация'>
       <Box
-        w='30rem'
-        className='mx-auto mt-5 border border-solid border-black/10 p-5'
+        w={{
+          xs: '-1rem'
+        }}
+        className='mx-auto mt-5 border border-solid border-black/10 p-5 sm:w-96'
       >
         <form onSubmit={form.onSubmit(values => values)}>
           <TextInput label='Логин' {...form.getInputProps('username')} />
@@ -42,7 +44,7 @@ const Authorization = () => {
             {...form.getInputProps('password')}
           />
 
-          <Flex justify='space-between' mt='lg'>
+          <Group position='right' mt='lg'>
             {type === 'login' ? (
               <>
                 <Anchor component='button' onClick={() => setType('signup')}>
@@ -59,7 +61,7 @@ const Authorization = () => {
                 <Button type='submit'>Зарегистрироваться</Button>
               </>
             )}
-          </Flex>
+          </Group>
         </form>
       </Box>
     </Layout>
