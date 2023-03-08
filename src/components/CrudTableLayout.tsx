@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Group, Modal, Table } from '@mantine/core';
+import { Drawer, Group, Table } from '@mantine/core';
 import { useDisclosure } from '@mantine/hooks';
 import { IconEdit, IconTrash } from '@tabler/icons-react';
 
@@ -59,7 +59,13 @@ export const CrudTableLayout = <T extends { id: number }>({
           ))}
         </tbody>
       </Table>
-      <Modal opened={opened} onClose={close} centered={true}>
+      <Drawer
+        opened={opened}
+        onClose={close}
+        zIndex={1002}
+        title='Создание новой строки'
+        position='right'
+      >
         <CrudForm
           labels={headers}
           body={changedBody!}
@@ -68,7 +74,7 @@ export const CrudTableLayout = <T extends { id: number }>({
           }}
           onCancel={close}
         />
-      </Modal>
+      </Drawer>
     </>
   );
 };

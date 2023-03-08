@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Button, Group, Modal, Select, Stack, Text } from '@mantine/core';
+import { Button, Drawer, Group, Select, Stack, Text } from '@mantine/core';
 import { useDisclosure } from '@mantine/hooks';
 
 import { CrudTableLayout } from '@/components/CrudTableLayout';
@@ -77,8 +77,13 @@ export const AdminScreen = () => {
             bodies={mockUsers}
           />
         )}
-
-        <Modal opened={opened} onClose={close} centered={true}>
+        <Drawer
+          opened={opened}
+          onClose={close}
+          zIndex={1002}
+          title='Создание новой строки'
+          position='right'
+        >
           <CrudForm
             labels={
               table === 'products'
@@ -95,7 +100,9 @@ export const AdminScreen = () => {
             }}
             onCancel={close}
           />
-        </Modal>
+        </Drawer>
+        {/*<Modal opened={opened} onClose={close} centered={true}>*/}
+        {/*</Modal>*/}
       </Stack>
     </Layout>
   );
