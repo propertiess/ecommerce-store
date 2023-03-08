@@ -48,14 +48,14 @@ const Authorization = () => {
             {type === 'login' ? (
               <>
                 <Anchor component='button' onClick={() => setType('signup')}>
-                  Не имеете аккаунта? Зарегистрироваться
+                  Не имеете аккаунт? Зарегистрироваться
                 </Anchor>
                 <Button type='submit'>Войти</Button>
               </>
             ) : (
               <>
                 <Anchor component='button' onClick={() => setType('login')}>
-                  Имеете аккаунта? Войти
+                  Имеете аккаунт? Войти
                 </Anchor>
 
                 <Button type='submit'>Зарегистрироваться</Button>
