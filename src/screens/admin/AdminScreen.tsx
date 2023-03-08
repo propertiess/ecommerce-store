@@ -1,39 +1,20 @@
 import { useState } from 'react';
-import { Button, Drawer, Group, Select, Stack, Text } from '@mantine/core';
-import { useDisclosure } from '@mantine/hooks';
+import { Group, Select, Stack, Text } from '@mantine/core';
 
-import { CrudTableLayout } from '@/components/CrudTableLayout';
 import { Layout } from '@/layout';
-import { CrudForm } from '@/screens/admin/components/CrudForm';
-import { Product } from '@/types';
+import { ProductsCrudTable } from '@/screens/admin/components/tables/ProductsCrudTable';
+import { AvailableTable } from '@/types';
 
-import {
-  useGetProducts,
-  useMutationProducts
-} from '../home/hooks/useGetProducts';
-
-const mockUsers = [
-  {
-    id: 1,
-    username: 'johnd',
-    password: 'm38rmF$'
-  }
-];
-
-const FIELDS_PRODUCT: (keyof Product)[] = [
-  'id',
-  'title',
-  'description',
-  'price',
-  'image'
-];
+// const mockUsers = [
+//   {
+//     id: 1,
+//     username: 'johnd',
+//     password: 'm38rmF$'
+//   }
+// ];
 
 export const AdminScreen = () => {
-  const [table, setTable] = useState<'products' | 'users'>('products');
-  const [opened, { close, open }] = useDisclosure(false);
-
-  const { data: products } = useGetProducts();
-  const { postProducts, putProducts, deleteProducts } = useMutationProducts();
+  const [table, setTable] = useState<AvailableTable>('products');
 
   return (
     <Layout title='Администрирование'>
@@ -54,55 +35,8 @@ export const AdminScreen = () => {
             ]}
             onChange={value => setTable(value as 'users' | 'products')}
           />
-          <Button
-            className='ml-auto mt-2 block'
-            variant='gradient'
-            onClick={open}
-          >
-            Добавить новую строку в таблицу: {table}
-          </Button>
         </Group>
-        {table === 'products' ? (
-          <CrudTableLayout
-            headers={FIELDS_PRODUCT}
-            bodies={products}
-            onRemove={id => deleteProducts(id)}
-            onEdit={(id, updateElement) =>
-              putProducts({ id, updateProduct: updateElement })
-            }
-          />
-        ) : (
-          <CrudTableLayout
-            headers={['id', 'username', 'password']}
-            bodies={mockUsers}
-          />
-        )}
-        <Drawer
-          opened={opened}
-          onClose={close}
-          zIndex={1002}
-          title='Создание новой строки'
-          position='right'
-        >
-          <CrudForm
-            labels={
-              table === 'products'
-                ? FIELDS_PRODUCT
-                : ['id', 'username', 'password']
-            }
-            body={{} as any}
-            onSave={changedBody => {
-              if (table === 'products') {
-                postProducts({ newProduct: changedBody });
-              } else {
-                // TODO: USER post
-              }
-            }}
-            onCancel={close}
-          />
-        </Drawer>
-        {/*<Modal opened={opened} onClose={close} centered={true}>*/}
-        {/*</Modal>*/}
+        {table === 'products' && <ProductsCrudTable />}
       </Stack>
     </Layout>
   );

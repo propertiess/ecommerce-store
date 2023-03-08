@@ -21,14 +21,8 @@ export const useMutationProducts = () => {
   });
 
   const { mutateAsync: putProducts } = useMutation({
-    mutationFn: ({
-      id,
-      updateProduct
-    }: {
-      id: number;
-      updateProduct: Product;
-    }) => {
-      return ProductService.putById(id, updateProduct);
+    mutationFn: (updateProduct: Product) => {
+      return ProductService.put(updateProduct);
     },
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: [QueryKeys.products] });
@@ -36,7 +30,7 @@ export const useMutationProducts = () => {
   });
 
   const { mutateAsync: postProducts } = useMutation({
-    mutationFn: ({ newProduct }: { newProduct: Omit<Product, 'id'> }) => {
+    mutationFn: (newProduct: Omit<Product, 'id'>) => {
       return ProductService.post(newProduct);
     },
     onSuccess: () => {

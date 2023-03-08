@@ -14,9 +14,9 @@ export const ProductService = {
     return data;
   },
 
-  async putById(id: number, updateProduct: Product) {
+  async put(updateProduct: Product) {
     const { data } = await instance.put<Product>(
-      `${endpoint}/${id}`,
+      `${endpoint}/${updateProduct.id}`,
       updateProduct
     );
     return data;
