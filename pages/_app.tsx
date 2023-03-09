@@ -4,6 +4,7 @@ import { Notifications } from '@mantine/notifications';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 import type { AppProps } from 'next/app';
+import NextNProgress from 'nextjs-progressbar';
 
 import '@/styles/globals.css';
 
@@ -30,6 +31,7 @@ const App = ({ Component, pageProps }: AppProps) => {
         }}
       >
         <Notifications zIndex={2000} />
+        <NextNProgress />
         <Component {...pageProps} />
       </MantineProvider>
       <ReactQueryDevtools />
