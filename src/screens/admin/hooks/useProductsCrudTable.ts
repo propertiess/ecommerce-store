@@ -1,15 +1,9 @@
 import { useState } from 'react';
 import { useDisclosure } from '@mantine/hooks';
 
-import {
-  useGetProducts,
-  useMutationProducts
-} from '@/screens/home/hooks/useGetProducts';
+import { useMutationProducts } from '@/screens/admin/hooks/useMutationProducts';
+import { useGetProducts } from '@/screens/home/hooks/useGetProducts';
 import { Product } from '@/types';
-import {
-  showErrorNotification,
-  showSuccessNotification
-} from '@/utils/helpers/notifications';
 
 export const useProductsCrudTable = () => {
   const [choiceProduct, setChoiceProduct] = useState<Product | null>(null);
@@ -32,48 +26,19 @@ export const useProductsCrudTable = () => {
     setOperation('post');
   };
 
-  const onDelete = async (productId: number): Promise<void> => {
-    try {
-      await deleteProducts(productId);
-      showSuccessNotification('Данные удалены');
-    } catch (e) {
-      showErrorNotification('Данные не удалены!');
-    }
+  const onDelete = (productId: number): void => {
+    deleteProducts(productId);
   };
 
-  const onPost = async (
-    product: Product | Omit<Product, 'id'>
-  ): Promise<void> => {
-    try {
-      await postProducts(product);
-      showSuccessNotification('Новые данные добавлены');
-    } catch (e) {
-      showErrorNotification('Новые данные не добавлены!');
-    }
-  };
-
-  const onUpdate = async (
-    product: Product | Omit<Product, 'id'>
-  ): Promise<void> => {
-    try {
-      await putProducts(product as Product);
-      showSuccessNotification('Данные изменены');
-    } catch (e) {
-      showErrorNotification('Данные не изменены!');
-    }
-  };
-
-  const onSave = async (
-    product: Product | Omit<Product, 'id'>
-  ): Promise<void> => {
+  const onSave = (product: Product | Omit<Product, 'id'>): void => {
     switch (operation) {
       case 'post': {
-        await onPost(product);
+        postProducts(product);
         break;
       }
 
       case 'put': {
-        await onUpdate(product);
+        putProducts(product as Product);
         break;
       }
     }
