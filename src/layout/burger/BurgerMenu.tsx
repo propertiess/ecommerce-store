@@ -1,4 +1,11 @@
-import { Container, List, Navbar, Portal } from '@mantine/core';
+import {
+  clsx,
+  Container,
+  List,
+  Navbar,
+  Portal,
+  useMantineColorScheme
+} from '@mantine/core';
 import { useRouter } from 'next/router';
 
 import { A } from '@/components/A';
@@ -12,6 +19,7 @@ type Props = {
 
 export const BurgerMenu = ({ opened, onChange }: Props) => {
   const router = useRouter();
+  const { colorScheme } = useMantineColorScheme();
 
   if (!opened) {
     return null;
@@ -21,7 +29,10 @@ export const BurgerMenu = ({ opened, onChange }: Props) => {
     <Portal>
       <Container
         fluid={true}
-        className='fixed top-0 left-0 mt-16 h-screen w-screen bg-white'
+        className={clsx(
+          'fixed top-0 left-0 mt-16 h-screen w-screen',
+          colorScheme === 'dark' ? 'bg-[#1A1B1E]' : 'bg-white'
+        )}
       >
         <Navbar className='border-0'>
           <List

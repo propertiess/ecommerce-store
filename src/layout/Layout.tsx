@@ -46,10 +46,10 @@ export const Layout = ({ title, description, children }: Props) => {
           <Logo />
           <Group>
             <Navbar links={links} />
+            <SwitcherThemeButton />
             <MediaQuery largerThan='sm' styles={{ display: 'none' }}>
               <Burger opened={burgerMenuOpened} onClick={toggle} />
             </MediaQuery>
-            <SwitcherThemeButton />
           </Group>
           <BurgerMenu opened={burgerMenuOpened} onChange={toggle} />
         </Flex>
