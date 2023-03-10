@@ -10,7 +10,6 @@ specifiers:
   '@mantine/notifications': ^6.0.1
   '@propertiess/eslint-config': ^1.0.4
   '@propertiess/prettier-config': ^1.1.0
-  '@tabler/icons-react': ^2.8.0
   '@tanstack/react-query': ^4.26.1
   '@tanstack/react-query-devtools': ^4.26.1
   '@testing-library/jest-dom': ^5.16.5
@@ -33,6 +32,7 @@ specifiers:
   prettier: ^2.8.4
   react: 18.2.0
   react-dom: 18.2.0
+  tabler-icons-react: ^1.56.0
   tailwindcss: ^3.2.7
   typescript: 4.9.5
   zod: ^3.21.4
@@ -43,7 +43,6 @@ dependencies:
   '@mantine/form': 6.0.1_react@18.2.0
   '@mantine/hooks': 6.0.0_react@18.2.0
   '@mantine/notifications': 6.0.1_alnr6smeh3mxkjfkbaftmhd6ia
-  '@tabler/icons-react': 2.8.0_react@18.2.0
   '@tanstack/react-query': 4.26.1_biqbaboplfbrettd7655fr4n2y
   axios: 1.3.4
   cookies-next: 2.1.1
@@ -51,6 +50,7 @@ dependencies:
   nextjs-progressbar: 0.0.16_next@13.2.3+react@18.2.0
   react: 18.2.0
   react-dom: 18.2.0_react@18.2.0
+  tabler-icons-react: 1.56.0_react@18.2.0
   zod: 3.21.4
 
 devDependencies:
@@ -1395,20 +1395,6 @@ packages:
     resolution: {integrity: sha512-4C7nX/dvpzB7za4Ql9K81xK3HPxCpHMgwTZVyf+9JQ6VUbn9jjZVN7/Nkdz/Ugzs2CSjqnL/UPXroiVBVHUWUw==}
     dependencies:
       tslib: 2.4.1
-    dev: false
-
-  /@tabler/icons-react/2.8.0_react@18.2.0:
-    resolution: {integrity: sha512-8d5nCsgIy6tVfu/mgwOnqgN4kgnLqj232f+VSHv/zie2PKlS6NEhkX5A3qB6/+xQ/y5Y0uiwXzjhzG+iM8whDQ==}
-    peerDependencies:
-      react: ^16.5.1 || ^17.0.0 || ^18.0.0
-    dependencies:
-      '@tabler/icons': 2.8.0
-      prop-types: 15.8.1
-      react: 18.2.0
-    dev: false
-
-  /@tabler/icons/2.8.0:
-    resolution: {integrity: sha512-8diABuB3J+NEUtdwIXJF0bJSE5VpnnyzWeiZGFq/XlcTYJNEF+36ijiPNUGpsV/QXY6syesJKmmPkUUwD+LxdA==}
     dev: false
 
   /@tanstack/match-sorter-utils/8.7.6:
@@ -5920,6 +5906,14 @@ packages:
 
   /tabbable/6.1.1:
     resolution: {integrity: sha512-4kl5w+nCB44EVRdO0g/UGoOp3vlwgycUVtkk/7DPyeLZUCuNFFKCFG6/t/DgHLrUPHjrZg6s5tNm+56Q2B0xyg==}
+    dev: false
+
+  /tabler-icons-react/1.56.0_react@18.2.0:
+    resolution: {integrity: sha512-FOme3w6PJIWDpeXqQ4xjArQqdxzrr9xNy7PSSgWpRzOUQ71RyZ7jt6WThsfyLBz5os78TPJRA8f/0NLjnKcx9A==}
+    peerDependencies:
+      react: '>= 16.8.0'
+    dependencies:
+      react: 18.2.0
     dev: false
 
   /tailwindcss/3.2.7_aesdjsunmf4wiehhujt67my7tu:

@@ -1,5 +1,5 @@
 import { Button, Drawer, Group, Table } from '@mantine/core';
-import { IconEdit, IconTrash } from '@tabler/icons-react';
+import { Edit, Trash } from 'tabler-icons-react';
 
 import { ProductsCrudForm } from '@/screens/admin/components/forms/ProductsCrudForm';
 import { useProductsCrudTable } from '@/screens/admin/hooks/useProductsCrudTable';
@@ -54,11 +54,11 @@ export const ProductsCrudTable = () => {
               ))}
               <td>
                 <Group>
-                  <IconEdit
+                  <Edit
                     className='cursor-pointer'
                     onClick={() => changeRow(product)}
                   />
-                  <IconTrash
+                  <Trash
                     className='cursor-pointer'
                     onClick={() => onDelete(product.id)}
                   />

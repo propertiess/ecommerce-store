@@ -1,5 +1,5 @@
 import { showNotification } from '@mantine/notifications';
-import { IconCheck } from '@tabler/icons-react';
+import { Check } from 'tabler-icons-react';
 
 export const showErrorNotification = (message: string): void => {
   showNotification({
@@ -17,6 +17,6 @@ export const showSuccessNotification = (message: string): void => {
   showNotification({
     title: 'Успех',
     message,
-    icon: <IconCheck />
+    icon: <Check />
   });
 };
