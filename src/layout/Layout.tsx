@@ -5,6 +5,7 @@ import {
   Container,
   Flex,
   Footer,
+  Group,
   Header,
   MediaQuery,
   Text
@@ -13,6 +14,7 @@ import { useDisclosure } from '@mantine/hooks';
 import Head from 'next/head';
 
 import { Logo } from '@/components/Logo';
+import { SwitcherThemeButton } from '@/components/SwitcherThemeButton';
 
 import { BurgerMenu } from './burger/BurgerMenu';
 import { links, Navbar } from './navbar';
@@ -42,10 +44,13 @@ export const Layout = ({ title, description, children }: Props) => {
       >
         <Flex align='center' justify='space-between'>
           <Logo />
-          <Navbar links={links} />
-          <MediaQuery largerThan='sm' styles={{ display: 'none' }}>
-            <Burger opened={burgerMenuOpened} onClick={toggle} />
-          </MediaQuery>
+          <Group>
+            <Navbar links={links} />
+            <MediaQuery largerThan='sm' styles={{ display: 'none' }}>
+              <Burger opened={burgerMenuOpened} onClick={toggle} />
+            </MediaQuery>
+            <SwitcherThemeButton />
+          </Group>
           <BurgerMenu opened={burgerMenuOpened} onChange={toggle} />
         </Flex>
       </Header>
