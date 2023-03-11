@@ -10,7 +10,7 @@ const productKeys: (keyof Product)[] = [
   'title',
   'description',
   'price',
-  'image'
+  'img'
 ];
 
 export const ProductsCrudTable = () => {

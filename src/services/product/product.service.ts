@@ -5,7 +5,7 @@ const endpoint = '/products';
 
 export const ProductService = {
   async getAll() {
-    const { data } = await instance.get<Product[]>(`${endpoint}`);
+    const { data } = await instance.get<Product[]>(endpoint);
     return data;
   },
 

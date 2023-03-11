@@ -18,7 +18,7 @@ export const ProductCard = ({ product }: Props) => {
           <Image
             height={150}
             width={150}
-            src={product.image}
+            src={product.img}
             alt={product.title}
           />
         </Center>

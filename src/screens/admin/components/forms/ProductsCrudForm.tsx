@@ -11,7 +11,7 @@ const schema = z.object({
   description: z
     .string()
     .min(10, { message: 'Описание товара должно иметь больше 10 символов' }),
-  image: z.string().url(),
+  img: z.string().url(),
   price: z
     .number()
     .min(100, { message: 'Значение цены должно быть больше 100' })
@@ -26,7 +26,7 @@ export const ProductsCrudForm = ({ product, onSave }: Props) => {
   const form = useForm<Product | Omit<Product, 'id'>>({
     initialValues: product ?? {
       title: '',
-      image: '',
+      img: '',
       price: 0,
       description: ''
     },
@@ -42,7 +42,7 @@ export const ProductsCrudForm = ({ product, onSave }: Props) => {
         {...form.getInputProps('description')}
       />
       <NumberInput label='price' mt='sm' {...form.getInputProps('price')} />
-      <TextInput label='image' mt='sm' {...form.getInputProps('image')} />
+      <TextInput label='img' mt='sm' {...form.getInputProps('img')} />
       <Group position='right' mt='xl'>
         <Button type='submit'>Сохранить</Button>
       </Group>
