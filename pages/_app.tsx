@@ -12,6 +12,7 @@ import { NextPageContext } from 'next';
 import type { AppProps } from 'next/app';
 import NextNProgress from 'nextjs-progressbar';
 
+import { AuthProvider } from '@/context/AuthProvider';
 import { useColorScheme } from '@/hooks/useColorScheme';
 
 import '@/styles/globals.css';
@@ -51,7 +52,9 @@ const App = (props: AppProps) => {
         >
           <Notifications zIndex={2000} />
           <NextNProgress />
-          <Component {...pageProps} />
+          <AuthProvider>
+            <Component {...pageProps} />
+          </AuthProvider>
         </MantineProvider>
       </ColorSchemeProvider>
       <ReactQueryDevtools />

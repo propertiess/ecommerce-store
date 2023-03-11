@@ -16,8 +16,7 @@ export const useMutationProducts = () => {
       queryClient.invalidateQueries({ queryKey: [QueryKeys.products] });
       showSuccessNotification('Данные удалены');
     },
-    onError: e => {
-      console.log(e);
+    onError: () => {
       showErrorNotification('Не удалось удалить данные!');
     }
   });

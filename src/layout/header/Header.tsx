@@ -10,12 +10,32 @@ import { useDisclosure } from '@mantine/hooks';
 
 import { Logo } from '@/components/Logo';
 import { SwitcherThemeButton } from '@/components/SwitcherThemeButton';
+import { useAuthContext } from '@/context/AuthProvider';
 
 import { BurgerMenu } from './burger/BurgerMenu';
-import { Navbar, notAuthorizationLinks } from './navbar';
+import {
+  authorizationLinks,
+  Navbar,
+  notAuthorizationLinks,
+  privateLinks
+} from './navbar';
 
 export const Header = () => {
   const [burgerMenuOpened, { toggle }] = useDisclosure();
+
+  const { removeToken, isAdmin, isUser } = useAuthContext();
+
+  const chooseLinks = () => {
+    if (isAdmin) {
+      return privateLinks;
+    }
+
+    if (isUser) {
+      return authorizationLinks;
+    }
+
+    return notAuthorizationLinks;
+  };
 
   return (
     <MantineHeader
@@ -26,7 +46,10 @@ export const Header = () => {
       <Flex align='center' justify='space-between'>
         <Logo />
         <Group>
-          <Navbar links={notAuthorizationLinks} onLogOut={undefined} />
+          <Navbar
+            links={chooseLinks()}
+            onLogOut={isAdmin || isUser ? removeToken : undefined}
+          />
           <SwitcherThemeButton />
           <MediaQuery largerThan='sm' styles={{ display: 'none' }}>
             <Burger opened={burgerMenuOpened} onClick={toggle} />
@@ -35,8 +58,8 @@ export const Header = () => {
         <BurgerMenu
           opened={burgerMenuOpened}
           onChange={toggle}
-          links={notAuthorizationLinks}
-          onLogOut={undefined}
+          links={chooseLinks()}
+          onLogOut={isAdmin || isUser ? removeToken : undefined}
         />
       </Flex>
     </MantineHeader>
