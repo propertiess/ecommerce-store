@@ -1,4 +1,5 @@
 import {
+  Anchor,
   clsx,
   Container,
   List,
@@ -9,15 +10,16 @@ import {
 import { useRouter } from 'next/router';
 
 import { A } from '@/components/A';
-
-import { links } from '../navbar';
+import { TLink } from '@/types';
 
 type Props = {
   opened: boolean;
   onChange?: () => void;
+  links: TLink[];
+  onLogOut?: () => void;
 };
 
-export const BurgerMenu = ({ opened, onChange }: Props) => {
+export const BurgerMenu = ({ opened, onChange, links, onLogOut }: Props) => {
   const router = useRouter();
   const { colorScheme } = useMantineColorScheme();
 
@@ -50,6 +52,11 @@ export const BurgerMenu = ({ opened, onChange }: Props) => {
                 </A>
               </List.Item>
             ))}
+            {onLogOut && (
+              <List.Item onClick={onLogOut}>
+                <Anchor component='div'>Выйти</Anchor>
+              </List.Item>
+            )}
           </List>
         </Navbar>
       </Container>

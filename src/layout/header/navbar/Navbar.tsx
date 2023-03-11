@@ -1,4 +1,4 @@
-import { List, Navbar as MantineNavbar } from '@mantine/core';
+import { Anchor, List, Navbar as MantineNavbar } from '@mantine/core';
 import { useRouter } from 'next/router';
 
 import { A } from '@/components/A';
@@ -6,9 +6,10 @@ import { TLink } from '@/types';
 
 type Props = {
   links: TLink[];
+  onLogOut?: () => void;
 };
 
-export const Navbar = ({ links }: Props) => {
+export const Navbar = ({ links, onLogOut }: Props) => {
   const router = useRouter();
 
   return (
@@ -25,6 +26,11 @@ export const Navbar = ({ links }: Props) => {
             </A>
           </List.Item>
         ))}
+        {onLogOut && (
+          <List.Item onClick={onLogOut}>
+            <Anchor component='div'>Выйти</Anchor>
+          </List.Item>
+        )}
       </List>
     </MantineNavbar>
   );
