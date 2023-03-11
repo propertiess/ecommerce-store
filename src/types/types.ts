@@ -10,7 +10,11 @@ export type User = {
   id: number;
   username: string;
   password: string;
+  roles: Role;
 };
+export type AuthUser = Omit<User, 'id' | 'roles'>;
+
+export type Role = 'USER' | 'ADMIN';
 
 export type AvailableTable = 'products' | 'users';
 
