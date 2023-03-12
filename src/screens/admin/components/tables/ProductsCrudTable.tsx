@@ -1,6 +1,6 @@
 import { Button, Drawer, Group, Table } from '@mantine/core';
-import { Edit, Trash } from 'tabler-icons-react';
 
+import { GroupOperationButtons } from '@/components/GroupOperationButtons';
 import { ProductsCrudForm } from '@/screens/admin/components/forms/ProductsCrudForm';
 import { useProductsCrudTable } from '@/screens/admin/hooks/useProductsCrudTable';
 import { Product } from '@/types';
@@ -53,16 +53,10 @@ export const ProductsCrudTable = () => {
                 <td key={key}>{product[key]}</td>
               ))}
               <td>
-                <Group>
-                  <Edit
-                    className='cursor-pointer'
-                    onClick={() => changeRow(product)}
-                  />
-                  <Trash
-                    className='cursor-pointer'
-                    onClick={() => onDelete(product.id)}
-                  />
-                </Group>
+                <GroupOperationButtons
+                  onEdit={() => changeRow(product)}
+                  onDelete={() => onDelete(product.id)}
+                />
               </td>
             </tr>
           ))}
