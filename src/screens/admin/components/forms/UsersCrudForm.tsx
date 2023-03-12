@@ -18,7 +18,7 @@ type Props = {
 
 export const UsersCrudForm = ({ user, onSave }: Props) => {
   const form = useForm<User | Omit<User, 'id'>>({
-    initialValues: user ?? {
+    initialValues: (user && { ...user, password: '' }) ?? {
       username: '',
       password: '',
       roles: 'USER'
