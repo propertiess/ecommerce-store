@@ -1,10 +1,12 @@
 import { useState } from 'react';
 import { useDisclosure } from '@mantine/hooks';
 
+import { BodyOperation } from '../types';
+
 export const useCrudTable = <T>() => {
   const [tableElement, setTableElement] = useState<T | null>(null);
   const [isDrawerOpen, { close, open }] = useDisclosure(false);
-  const [operation, setOperation] = useState<'post' | 'put'>();
+  const [operation, setOperation] = useState<BodyOperation>();
 
   const changeRow = (changeElement: T): void => {
     setTableElement(changeElement);
