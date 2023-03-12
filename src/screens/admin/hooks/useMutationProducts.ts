@@ -1,47 +1,25 @@
 import { useMutation } from '@tanstack/react-query';
 
-import { queryClient } from '@/../pages/_app';
 import { ProductService } from '@/services/product/product.service';
 import { Product } from '@/types';
 import { QueryKeys } from '@/utils/consts';
-import {
-  showErrorNotification,
-  showSuccessNotification
-} from '@/utils/helpers/notifications';
+import { mutationOnSuccessOnError } from '@/utils/helpers/mutationOnSuccessOnError';
 
 export const useMutationProducts = () => {
   const { mutate: deleteProducts } = useMutation({
     mutationFn: (id: number) => ProductService.deleteById(id),
-    onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: [QueryKeys.products] });
-      showSuccessNotification('Данные удалены');
-    },
-    onError: () => {
-      showErrorNotification('Не удалось удалить данные!');
-    }
+    ...mutationOnSuccessOnError([QueryKeys.products], 'delete')
   });
 
   const { mutate: putProducts } = useMutation({
     mutationFn: (updateProduct: Product) => ProductService.put(updateProduct),
-    onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: [QueryKeys.products] });
-      showSuccessNotification('Данные изменены');
-    },
-    onError: () => {
-      showErrorNotification('Не удалось изменить данные!');
-    }
+    ...mutationOnSuccessOnError([QueryKeys.products], 'put')
   });
 
   const { mutate: postProducts } = useMutation({
     mutationFn: (newProduct: Omit<Product, 'id'>) =>
       ProductService.post(newProduct),
-    onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: [QueryKeys.products] });
-      showSuccessNotification('Новые данные добавлены');
-    },
-    onError: () => {
-      showErrorNotification('Не удалось добавить данные!');
-    }
+    ...mutationOnSuccessOnError([QueryKeys.products], 'post')
   });
 
   return {
