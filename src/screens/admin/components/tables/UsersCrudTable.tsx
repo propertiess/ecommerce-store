@@ -1,22 +1,17 @@
 import { Button, Drawer, Group, Table } from '@mantine/core';
 
 import { GroupOperationButtons } from '@/components/GroupOperationButtons';
-import { ProductsCrudForm } from '@/screens/admin/components/forms/ProductsCrudForm';
-import { useProductsCrudTable } from '@/screens/admin/hooks/useProductsCrudTable';
-import { Product } from '@/types';
+import { User } from '@/types';
 
-const productKeys: (keyof Product)[] = [
-  'id',
-  'title',
-  'description',
-  'price',
-  'img'
-];
+import { useUsersCrudTable } from '../../hooks/useUsersCrudTable';
+import { UsersCrudForm } from '../forms/UsersCrudForm';
 
-export const ProductsCrudTable = () => {
+const userKeys: (keyof User)[] = ['id', 'username', 'password', 'roles'];
+
+export const UsersCrudTable = () => {
   const {
-    products,
-    choiceProduct,
+    users,
+    choiceUser,
     operation,
     isDrawerOpen,
     addRow,
@@ -24,7 +19,7 @@ export const ProductsCrudTable = () => {
     onSave,
     onDelete,
     close
-  } = useProductsCrudTable();
+  } = useUsersCrudTable();
 
   return (
     <>
@@ -34,28 +29,28 @@ export const ProductsCrudTable = () => {
           variant='gradient'
           onClick={addRow}
         >
-          Добавить новую строку в таблицу: products
+          Добавить новую строку в таблицу: users
         </Button>
       </Group>
       <Table>
         <thead>
           <tr>
-            {productKeys.map(key => (
+            {userKeys.map(key => (
               <th key={key}>{key}</th>
             ))}
             <th>Operation</th>
           </tr>
         </thead>
         <tbody>
-          {products?.map(product => (
-            <tr key={product.id}>
-              {productKeys.map(key => (
-                <td key={key}>{product[key]}</td>
+          {users?.map(user => (
+            <tr key={user.id}>
+              {userKeys.map(key => (
+                <td key={key}>{user[key]}</td>
               ))}
               <td>
                 <GroupOperationButtons
-                  onEdit={() => changeRow(product)}
-                  onDelete={() => onDelete(product.id)}
+                  onEdit={() => changeRow(user)}
+                  onDelete={() => onDelete(user.id)}
                 />
               </td>
             </tr>
@@ -71,10 +66,7 @@ export const ProductsCrudTable = () => {
         }
         position='right'
       >
-        <ProductsCrudForm
-          product={choiceProduct}
-          onSave={product => onSave(product)}
-        />
+        <UsersCrudForm user={choiceUser} onSave={onSave} />
       </Drawer>
     </>
   );

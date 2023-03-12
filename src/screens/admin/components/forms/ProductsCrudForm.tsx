@@ -18,7 +18,7 @@ const schema = z.object({
 });
 
 type Props = {
-  product: Product | null;
+  product: Product | Omit<Product, 'id'> | null;
   onSave: (product: Product | Omit<Product, 'id'>) => void;
 };
 

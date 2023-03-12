@@ -5,13 +5,7 @@ import { Layout } from '@/layout';
 import { ProductsCrudTable } from '@/screens/admin/components/tables/ProductsCrudTable';
 import { AvailableTable } from '@/types';
 
-// const mockUsers = [
-//   {
-//     id: 1,
-//     username: 'johnd',
-//     password: 'm38rmF$'
-//   }
-// ];
+import { UsersCrudTable } from './components/tables/UsersCrudTable';
 
 export const AdminScreen = () => {
   const [table, setTable] = useState<AvailableTable>('products');
@@ -37,6 +31,7 @@ export const AdminScreen = () => {
           />
         </Group>
         {table === 'products' && <ProductsCrudTable />}
+        {table === 'users' && <UsersCrudTable />}
       </Stack>
     </Layout>
   );
