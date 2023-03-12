@@ -25,9 +25,11 @@ export const ProductCard = ({ product }: Props) => {
         <Stack className='relative mx-auto h-52'>
           <Image
             className='object-contain'
+            sizes='100%'
             src={product.img}
             alt={product.title}
             fill={true}
+            priority={product.id < 5}
           />
         </Stack>
       </Card.Section>
