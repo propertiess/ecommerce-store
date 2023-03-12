@@ -1,4 +1,12 @@
-import { Button, Card, Center, Group, Text, Tooltip } from '@mantine/core';
+import {
+  Button,
+  Card,
+  Center,
+  Group,
+  Stack,
+  Text,
+  Tooltip
+} from '@mantine/core';
 import { useDisclosure } from '@mantine/hooks';
 import Image from 'next/image';
 
@@ -14,16 +22,15 @@ export const ProductCard = ({ product }: Props) => {
   return (
     <Card withBorder h='100%'>
       <Card.Section pt='sm'>
-        <Center>
+        <Stack className='relative mx-auto h-52'>
           <Image
-            height={150}
-            width={150}
+            className='object-contain'
             src={product.img}
             alt={product.title}
+            fill={true}
           />
-        </Center>
+        </Stack>
       </Card.Section>
-      <Card.Section></Card.Section>
       <Center mt='md'>
         {product.title.length > 'Mens Casual Slim Fit'.length ? (
           <Tooltip label={product.title} withinPortal>
