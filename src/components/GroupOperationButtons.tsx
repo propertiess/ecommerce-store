@@ -15,8 +15,8 @@ export const GroupOperationButtons = ({ onEdit, onDelete }: Props) => {
         </span>
       </Tooltip>
       <Tooltip label='Удалить'>
-        <span onClick={onEdit}>
-          <Trash className='cursor-pointer' color='red' onClick={onDelete} />
+        <span onClick={onDelete}>
+          <Trash className='cursor-pointer' color='red' />
         </span>
       </Tooltip>
     </Group>
