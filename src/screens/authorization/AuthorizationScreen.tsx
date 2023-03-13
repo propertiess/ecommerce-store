@@ -11,8 +11,8 @@ import { useForm, zodResolver } from '@mantine/form';
 import { useRouter } from 'next/router';
 import { z } from 'zod';
 
-import { useAuthContext } from '@/context/AuthProvider';
 import { AuthService } from '@/services/auth/auth.service';
+import { useAuthStore } from '@/store/auth/Auth';
 import { AuthUser } from '@/types';
 import { getBase64 } from '@/utils/helpers/getBase64';
 
@@ -25,7 +25,7 @@ export const AuthorizationScreen = () => {
   const [type, setType] = useState<'register' | 'login'>('login');
   const router = useRouter();
 
-  const { setAuthToken } = useAuthContext();
+  const { setAuthToken } = useAuthStore();
 
   const form = useForm({
     initialValues: {

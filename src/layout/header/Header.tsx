@@ -7,10 +7,11 @@ import {
   MediaQuery
 } from '@mantine/core';
 import { useDisclosure } from '@mantine/hooks';
+import { observer } from 'mobx-react-lite';
 
 import { Logo } from '@/components/Logo';
 import { SwitcherThemeButton } from '@/components/SwitcherThemeButton';
-import { useAuthContext } from '@/context/AuthProvider';
+import { useAuthStore } from '@/store/auth/Auth';
 
 import { BurgerMenu } from './burger/BurgerMenu';
 import {
@@ -20,10 +21,10 @@ import {
   privateLinks
 } from './navbar';
 
-export const Header = () => {
+export const Header = observer(() => {
   const [burgerMenuOpened, { toggle }] = useDisclosure();
 
-  const { removeToken, isAdmin, isUser } = useAuthContext();
+  const { removeToken, isAdmin, isUser } = useAuthStore();
 
   const chooseLinks = () => {
     if (isAdmin) {
@@ -64,4 +65,4 @@ export const Header = () => {
       </Flex>
     </MantineHeader>
   );
-};
+});

@@ -12,8 +12,8 @@ import { NextPageContext } from 'next';
 import type { AppProps } from 'next/app';
 import NextNProgress from 'nextjs-progressbar';
 
-import { AuthProvider } from '@/context/AuthProvider';
 import { useColorScheme } from '@/hooks/useColorScheme';
+import { AuthProvider } from '@/store/auth/AuthProvider';
 
 import '@/styles/globals.css';
 
