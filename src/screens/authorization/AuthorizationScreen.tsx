@@ -8,6 +8,7 @@ import {
   TextInput
 } from '@mantine/core';
 import { useForm, zodResolver } from '@mantine/form';
+import { AxiosError } from 'axios';
 import { useRouter } from 'next/router';
 import { z } from 'zod';
 
@@ -15,6 +16,7 @@ import { AuthService } from '@/services/auth/auth.service';
 import { useAuthStore } from '@/store/auth/Auth';
 import { AuthUser } from '@/types';
 import { getBase64 } from '@/utils/helpers/getBase64';
+import { showErrorNotification } from '@/utils/helpers/notifications';
 
 const schema = z.object({
   username: z.string().min(4, { message: 'Должно быть больше 4 символов' }),
@@ -43,6 +45,9 @@ export const AuthorizationScreen = () => {
       token && setAuthToken(token);
       router.push('/');
     } catch (e) {
+      if (e instanceof AxiosError && e.response?.data?.detail) {
+        showErrorNotification(e.response?.data?.detail);
+      }
       console.error(e);
     }
   };
