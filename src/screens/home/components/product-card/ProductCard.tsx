@@ -11,6 +11,7 @@ import { useDisclosure } from '@mantine/hooks';
 import Image from 'next/image';
 
 import { Product } from '@/types';
+import { convertCurrency } from '@/utils/helpers/convertCurrency';
 
 type Props = {
   product: Product;
@@ -46,7 +47,7 @@ export const ProductCard = ({ product }: Props) => {
         )}
       </Center>
       <Group grow align='center' mt='md'>
-        <Text>{product.price} $</Text>
+        <Text>{convertCurrency(product.price)}</Text>
         {!added ? (
           <Button variant='light' color='blue' radius='md' onClick={toggle}>
             Купить
