@@ -1,9 +1,9 @@
 import { useState } from 'react';
 import {
   Anchor,
-  Box,
   Button,
   Group,
+  Paper,
   PasswordInput,
   TextInput
 } from '@mantine/core';
@@ -53,12 +53,7 @@ export const AuthorizationScreen = () => {
   };
 
   return (
-    <Box
-      w={{
-        xs: '-1rem'
-      }}
-      className='mx-auto mt-5 border border-solid border-black/10 p-5 sm:w-96'
-    >
+    <Paper withBorder className='mx-auto mt-5 p-5 sm:w-96'>
       <form onSubmit={form.onSubmit(onAuthorize)}>
         <TextInput label='Логин' {...form.getInputProps('username')} />
         <PasswordInput
@@ -86,6 +81,6 @@ export const AuthorizationScreen = () => {
           )}
         </Group>
       </form>
-    </Box>
+    </Paper>
   );
 };
