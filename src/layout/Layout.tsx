@@ -24,11 +24,7 @@ export const Layout = ({ title, description, children }: Props) => {
       <main className='flex-grow'>
         <Container fluid={true}>{children}</Container>
       </main>
-      <Footer
-        height='auto'
-        p='xs'
-        // className={clsx(burgerMenuOpened && 'hidden')}
-      >
+      <Footer height='auto' p='xs'>
         <Text className='text-center'>
           Shop &copy; 2023. Все права защищены.
         </Text>
