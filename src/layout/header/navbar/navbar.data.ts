@@ -6,6 +6,10 @@ export const notAuthorizationLinks: TLink[] = [
     href: '/'
   },
   {
+    title: 'Машины',
+    href: '/cars'
+  },
+  {
     title: 'Вход',
     href: '/authorization'
   }
@@ -13,10 +17,10 @@ export const notAuthorizationLinks: TLink[] = [
 
 export const authorizationLinks: TLink[] = notAuthorizationLinks
   .slice()
-  .splice(0, 1);
+  .splice(0, notAuthorizationLinks.length - 1);
 
 export const privateLinks: TLink[] = [
-  ...notAuthorizationLinks.slice().splice(0, 1),
+  ...notAuthorizationLinks.slice().splice(0, notAuthorizationLinks.length - 1),
   {
     title: 'Админ панель',
     href: '/admin'

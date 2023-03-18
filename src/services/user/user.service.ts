@@ -1,6 +1,6 @@
 import { User } from '@/types';
 
-import { instance } from '../instance';
+import { instance } from '../api/main/instance';
 
 const endpoint = '/users';
 

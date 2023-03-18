@@ -1,4 +1,4 @@
-import { instance } from '@/services/instance';
+import { instance } from '@/services/api/main/instance';
 import { Product } from '@/types';
 
 const endpoint = '/products';

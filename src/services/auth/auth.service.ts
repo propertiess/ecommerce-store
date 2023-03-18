@@ -1,4 +1,4 @@
-import { instance } from '@/services/instance';
+import { instance } from '@/services/api/main/instance';
 import { AuthUser, User } from '@/types';
 
 export const AuthService = {
