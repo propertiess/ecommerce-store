@@ -9,12 +9,12 @@ type Props = {
 export const GroupOperationButtons = ({ onEdit, onDelete }: Props) => {
   return (
     <Group>
-      <Tooltip label='Изменить'>
+      <Tooltip label='Изменить' withinPortal={true}>
         <span onClick={onEdit}>
           <Edit className='cursor-pointer' />
         </span>
       </Tooltip>
-      <Tooltip label='Удалить'>
+      <Tooltip label='Удалить' withinPortal={true}>
         <span onClick={onDelete}>
           <Trash className='cursor-pointer' color='red' />
         </span>
