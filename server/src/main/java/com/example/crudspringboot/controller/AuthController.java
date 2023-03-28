@@ -5,6 +5,7 @@ import com.example.crudspringboot.model.Role;
 import com.example.crudspringboot.model.UserInfo;
 import com.example.crudspringboot.service.UserService;
 import com.example.crudspringboot.service.userInfo.UserInfoRepository;
+import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -54,5 +55,6 @@ public class AuthController {
         }
         return new ResponseStatusException(HttpStatus.NOT_FOUND, "Пользователь не существует");
     }
+    
 }
 
