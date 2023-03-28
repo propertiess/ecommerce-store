@@ -1,4 +1,4 @@
-import { Loader } from '@mantine/core';
+import { Center, Loader } from '@mantine/core';
 import { observer } from 'mobx-react-lite';
 
 import { useGetProducts } from '@/screens/home/hooks/useGetProducts';
@@ -12,14 +12,23 @@ type Props = {
 
 export const OrderList = observer(({ order }: Props) => {
   const { data, isFetching } = useGetProducts();
+
+  if (isFetching) {
+    return (
+      <Center className='mt-3'>
+        <Loader />
+      </Center>
+    );
+  }
+
   return (
     <>
-      {isFetching ? (
-        <Loader />
-      ) : (
+      {order.length ? (
         order.map(item => (
           <OrderItem key={item.productId} item={item} products={data!} />
         ))
+      ) : (
+        <Center className='mt-3'>Товаров нет!</Center>
       )}
     </>
   );

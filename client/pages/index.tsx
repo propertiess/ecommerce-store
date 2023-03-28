@@ -1,10 +1,9 @@
-import { Text, Loader } from '@mantine/core';
+import { Center, Loader } from '@mantine/core';
 
 import { Layout } from '@/layout';
 import { HomeScreen } from '@/screens/home';
-import { ProductService } from '@/services/product/product.service';
-import { Product } from '@/types';
 import { useGetProducts } from '@/screens/home/hooks/useGetProducts';
+import { Product } from '@/types';
 
 export type HomePageProps = {
   products?: Product[];
@@ -15,7 +14,13 @@ const Home = () => {
 
   return (
     <Layout title='Магазин' description='Магазин товаров'>
-      {!isFetching ? <>{data && <HomeScreen products={data} />}</> : <Loader />}
+      {!isFetching ? (
+        <>{data && <HomeScreen products={data} />}</>
+      ) : (
+        <Center className='mt-3'>
+          <Loader />
+        </Center>
+      )}
     </Layout>
   );
 };
