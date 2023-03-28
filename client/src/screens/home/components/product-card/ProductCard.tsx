@@ -1,4 +1,7 @@
+import { observer } from 'mobx-react-lite';
+
 import { GoodsCard } from '@/components/GoodsCard';
+import { useAuthStore } from '@/store/auth/Auth';
 import { Product } from '@/types';
 
 type Props = {
@@ -8,15 +11,20 @@ type Props = {
   onCancel: (id: number) => void;
 };
 
-export const ProductCard = ({ product, isAdded, onAdded, onCancel }: Props) => {
-  return (
-    <GoodsCard
-      goods={product}
-      added={isAdded}
-      onAdded={onAdded}
-      onCancel={onCancel}
-      withToolTip={true}
-      maxLengthTitle={'Mens Cotton Jacket'.length}
-    />
-  );
-};
+export const ProductCard = observer(
+  ({ product, isAdded, onAdded, onCancel }: Props) => {
+    const { userId } = useAuthStore();
+
+    return (
+      <GoodsCard
+        goods={product}
+        added={isAdded}
+        onAdded={onAdded}
+        onCancel={onCancel}
+        withToolTip={true}
+        disabled={!userId}
+        maxLengthTitle={'Mens Cotton Jacket'.length}
+      />
+    );
+  }
+);

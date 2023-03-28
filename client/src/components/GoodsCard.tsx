@@ -19,6 +19,7 @@ type Props<T> = {
   maxLengthTitle?: number;
   onAdded: (id: number) => void;
   onCancel: (id: number) => void;
+  disabled?: boolean;
 };
 
 export const GoodsCard = <T extends Omit<Car, ''>>({
@@ -27,7 +28,8 @@ export const GoodsCard = <T extends Omit<Car, ''>>({
   maxLengthTitle = 20,
   withToolTip = false,
   onAdded,
-  onCancel
+  onCancel,
+  disabled = false
 }: Props<T>) => {
   return (
     <Card withBorder h='100%'>
@@ -61,6 +63,7 @@ export const GoodsCard = <T extends Omit<Car, ''>>({
             color='blue'
             radius='md'
             onClick={() => onAdded(goods.id)}
+            disabled={disabled}
           >
             Купить
           </Button>
@@ -70,6 +73,7 @@ export const GoodsCard = <T extends Omit<Car, ''>>({
             color='red'
             radius='md'
             onClick={() => onCancel(goods.id)}
+            disabled={disabled}
           >
             Убрать
           </Button>
