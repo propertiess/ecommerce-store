@@ -17,8 +17,8 @@ type Props<T> = {
   added: boolean;
   withToolTip?: boolean;
   maxLengthTitle?: number;
-  onAdded: () => void;
-  onCancel: () => void;
+  onAdded: (id: number) => void;
+  onCancel: (id: number) => void;
 };
 
 export const GoodsCard = <T extends Omit<Car, ''>>({
@@ -56,11 +56,21 @@ export const GoodsCard = <T extends Omit<Car, ''>>({
       <Group grow align='center' mt='md'>
         <Text>{convertCurrency(goods.price)}</Text>
         {!added ? (
-          <Button variant='light' color='blue' radius='md' onClick={onAdded}>
+          <Button
+            variant='light'
+            color='blue'
+            radius='md'
+            onClick={() => onAdded(goods.id)}
+          >
             Купить
           </Button>
         ) : (
-          <Button variant='light' color='red' radius='md' onClick={onCancel}>
+          <Button
+            variant='light'
+            color='red'
+            radius='md'
+            onClick={() => onCancel(goods.id)}
+          >
             Убрать
           </Button>
         )}

@@ -14,6 +14,7 @@ import NextNProgress from 'nextjs-progressbar';
 
 import { useColorScheme } from '@/hooks/useColorScheme';
 import { AuthProvider } from '@/store/auth/AuthProvider';
+import { OrderProvider } from '@/store/order/OrderProvider';
 
 import '@/styles/globals.css';
 
@@ -53,7 +54,9 @@ const App = (props: AppProps) => {
           <Notifications zIndex={2000} />
           <NextNProgress />
           <AuthProvider>
-            <Component {...pageProps} />
+            <OrderProvider>
+              <Component {...pageProps} />
+            </OrderProvider>
           </AuthProvider>
         </MantineProvider>
       </ColorSchemeProvider>

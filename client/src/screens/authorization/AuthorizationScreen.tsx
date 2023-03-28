@@ -15,6 +15,7 @@ import { z } from 'zod';
 import { AuthService } from '@/services/auth/auth.service';
 import { useAuthStore } from '@/store/auth/Auth';
 import { AuthUser } from '@/types';
+import { Storage } from '@/utils/api/storage';
 import { getBase64 } from '@/utils/helpers/getBase64';
 import { showErrorNotification } from '@/utils/helpers/notifications';
 
@@ -43,6 +44,7 @@ export const AuthorizationScreen = () => {
 
       const token = getBase64(data.roles);
       token && setAuthToken(token);
+      Storage.setItem('user-id', data.id);
       router.push('/');
     } catch (e) {
       if (e instanceof AxiosError && e.response?.data?.detail) {
