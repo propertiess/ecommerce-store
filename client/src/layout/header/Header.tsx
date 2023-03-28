@@ -24,7 +24,7 @@ import {
 export const Header = observer(() => {
   const [burgerMenuOpened, { toggle }] = useDisclosure();
 
-  const { removeToken, isAdmin, isUser } = useAuthStore();
+  const { removeUser, isAdmin, isUser } = useAuthStore();
 
   const chooseLinks = () => {
     if (isAdmin) {
@@ -49,7 +49,7 @@ export const Header = observer(() => {
         <Group>
           <Navbar
             links={chooseLinks()}
-            onLogOut={isAdmin || isUser ? removeToken : undefined}
+            onLogOut={isAdmin || isUser ? removeUser : undefined}
           />
           <SwitcherThemeButton />
           <MediaQuery largerThan='sm' styles={{ display: 'none' }}>
@@ -60,7 +60,7 @@ export const Header = observer(() => {
           opened={burgerMenuOpened}
           onChange={toggle}
           links={chooseLinks()}
-          onLogOut={isAdmin || isUser ? removeToken : undefined}
+          onLogOut={isAdmin || isUser ? removeUser : undefined}
         />
       </Flex>
     </MantineHeader>

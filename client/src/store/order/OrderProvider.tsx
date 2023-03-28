@@ -2,25 +2,26 @@ import { PropsWithChildren, useEffect } from 'react';
 import { observer } from 'mobx-react-lite';
 
 import { OrderService } from '@/services/order/order.service';
-import { Storage } from '@/utils/api/storage';
+
+import { useAuthStore } from '../auth/Auth';
 
 import { useOrderStore } from './Order';
 
 type Props = PropsWithChildren;
 
 export const OrderProvider = observer(({ children }: Props) => {
-  const { setOrder } = useOrderStore();
+  const { setOrder, order } = useOrderStore();
+  const { userId } = useAuthStore();
 
   useEffect(() => {
-    const userId = Storage.getItem('user-id');
-
     if (!userId) {
+      order.length && setOrder([]);
       return;
     }
 
     const fetch = async () => {
       try {
-        const orderDto = await OrderService.getByUserId(+userId);
+        const orderDto = await OrderService.getByUserId(userId);
         setOrder(orderDto.order);
       } catch (e) {
         console.error(e);
@@ -28,7 +29,7 @@ export const OrderProvider = observer(({ children }: Props) => {
     };
     fetch();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [userId]);
 
   return <>{children}</>;
 });

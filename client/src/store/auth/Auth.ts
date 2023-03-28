@@ -6,18 +6,22 @@ import { AuthEnum, RoleEnum } from '@/utils/consts';
 
 class Auth {
   authToken: string | null = null;
+  userId: number | null = null;
 
   constructor() {
     makeAutoObservable(this);
   }
 
-  setAuthToken = (token: string) => {
+  setUser = (token: string, id: number) => {
     this.authToken = token;
+    this.userId = id;
     setCookie(AuthEnum.TOKEN, token);
+    Storage.setItem('user-id', id);
   };
 
-  removeToken = () => {
+  removeUser = () => {
     this.authToken = null;
+    this.userId = null;
     deleteCookie(AuthEnum.TOKEN);
     Storage.removeItem('user-id');
   };
