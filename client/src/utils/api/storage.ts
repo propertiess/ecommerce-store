@@ -24,5 +24,13 @@ export const Storage = {
     const jsonData = JSON.stringify(data) as string;
     localStorage.setItem(key, jsonData);
     return true;
+  },
+  removeItem(key: StorageKeys): boolean {
+    if (!checkAvailableStorage()) {
+      return false;
+    }
+
+    localStorage.removeItem(key);
+    return true;
   }
 };

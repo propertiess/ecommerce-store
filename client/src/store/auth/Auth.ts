@@ -1,6 +1,7 @@
 import { deleteCookie, setCookie } from 'cookies-next';
 import { makeAutoObservable } from 'mobx';
 
+import { Storage } from '@/utils/api/storage';
 import { AuthEnum, RoleEnum } from '@/utils/consts';
 
 class Auth {
@@ -18,6 +19,7 @@ class Auth {
   removeToken = () => {
     this.authToken = null;
     deleteCookie(AuthEnum.TOKEN);
+    Storage.removeItem('user-id');
   };
 
   get isAdmin(): boolean {

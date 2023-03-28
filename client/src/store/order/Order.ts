@@ -38,17 +38,26 @@ class Order {
   };
 
   private mutateOrder = async (order: TOrderItem[]) => {
-    const userId = +Storage.getItem<string>('user-id')!;
+    const userId = Storage.getItem<string>('user-id');
+
+    if (!userId) {
+      return;
+    }
 
     const orderDto: OrderDto = {
-      userId,
+      userId: +userId,
       order
     };
 
     try {
       await OrderService.put(orderDto);
     } catch (e) {
+      console.error(e);
+    }
+    try {
       await OrderService.post(orderDto);
+    } catch (e) {
+      console.error(e);
     }
   };
 }
