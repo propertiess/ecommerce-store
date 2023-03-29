@@ -19,17 +19,14 @@ export const useUsersCrudTable = () => {
   } = useCrudTable<UsersCrudTableProps>();
 
   const { data: users } = useGetUsers();
-  // const { postProducts, putProducts, deleteProducts } = useMutationProducts();
-  const { deleteUsers, postUsers, putUsers } = useMutationUsers();
+  const { mutatePost, mutatePut, mutateDelete } = useMutationUsers();
 
   const onUpdate = (updateUser: UsersCrudTableProps) => {
-    // putProducts(updateProduct as Product);
-    putUsers(updateUser as User);
+    mutatePut(updateUser as User);
   };
 
   const onPost = (postUser: UsersCrudTableProps) => {
-    // postProducts(postProduct);
-    postUsers(postUser);
+    mutatePost(postUser);
   };
 
   return {
@@ -40,7 +37,7 @@ export const useUsersCrudTable = () => {
     addRow,
     changeRow,
     onDelete: onDelete(id => {
-      deleteUsers(id);
+      mutateDelete(id);
     }),
     onSave: onSave(onPost, onUpdate),
     close

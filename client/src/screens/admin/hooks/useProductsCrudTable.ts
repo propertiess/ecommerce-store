@@ -17,14 +17,14 @@ export const useProductsCrudTable = () => {
   } = useCrudTable<Product | Omit<Product, 'id'>>();
 
   const { data: products } = useGetProducts();
-  const { postProducts, putProducts, deleteProducts } = useMutationProducts();
+  const { mutatePost, mutatePut, mutateDelete } = useMutationProducts();
 
   const onUpdate = (updateProduct: Product | Omit<Product, 'id'>) => {
-    putProducts(updateProduct as Product);
+    mutatePut(updateProduct as Product);
   };
 
-  const onPost = (postProduct: Product | Omit<Product, 'id'>) => {
-    postProducts(postProduct);
+  const onPost = (postProduct: Omit<Product, 'id'>) => {
+    mutatePost(postProduct as Omit<Product, 'id'>);
   };
 
   return {
@@ -35,7 +35,7 @@ export const useProductsCrudTable = () => {
     addRow,
     changeRow,
     onDelete: onDelete(id => {
-      deleteProducts(id);
+      mutateDelete(id);
     }),
     onSave: onSave(onPost, onUpdate),
     close

@@ -10,17 +10,17 @@ export const UserService = {
     return data;
   },
 
-  async update(user: User) {
+  async put(user: User): Promise<User> {
     const { data } = await instance.put(`${endpoint}/${user.id}`, user);
     return data;
   },
 
-  async post(user: Omit<User, 'id'>) {
+  async post(user: Omit<User, 'id'>): Promise<User> {
     const { data } = await instance.post(endpoint, user);
     return data;
   },
 
-  async delete(id: number) {
+  async delete(id: number): Promise<User> {
     const { data } = await instance.delete(`${endpoint}/${id}`);
     return data;
   }

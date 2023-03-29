@@ -9,7 +9,7 @@ export const ProductService = {
     return data;
   },
 
-  async deleteById(id: number) {
+  async delete(id: number) {
     const { data } = await instance.delete<Product>(`${endpoint}/${id}`);
     return data;
   },

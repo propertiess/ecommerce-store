@@ -1,3 +1,5 @@
+import { QueryKeys } from '@/utils/consts';
+
 export type Product = {
   id: number;
   title: string;
@@ -16,7 +18,7 @@ export type AuthUser = Omit<User, 'id' | 'roles'>;
 
 export type Role = 'USER' | 'ADMIN';
 
-export type AvailableTable = 'products' | 'users';
+export type AvailableTable = keyof typeof QueryKeys;
 
 export type TLink = {
   title: string;
