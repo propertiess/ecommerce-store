@@ -1,7 +1,5 @@
 package com.example.server.controller;
 
-import com.example.server.dto.OrderDto;
-import com.example.server.dto.OrderItemDto;
 import com.example.server.model.Basket;
 import com.example.server.model.BasketItem;
 import com.example.server.model.UserInfo;
@@ -35,13 +33,13 @@ public class BasketController {
     }
 
     @PostMapping()
-    public Object addOrder(@RequestBody OrderDto orderDto) {
+    public Object addBasket(@RequestBody Basket orderDto) {
         if (userInfoRepository.existsById(orderDto.getUserId())) {
             UserInfo userInfo = userInfoRepository.findById(orderDto.getUserId());
 
-            List<OrderItemDto> orderItemDtos = orderDto.getOrder();
+            List<BasketItem> orderItemDtos = orderDto.getBasket();
             List<BasketItem> orderItems = new ArrayList<>();
-            for (OrderItemDto orderItemDto : orderItemDtos) {
+            for (BasketItem orderItemDto : orderItemDtos) {
                 if (!cardRepository.existsById(orderItemDto.getProductId())) {
                     return new ResponseStatusException(HttpStatus.NOT_FOUND, "Нет продукта " + orderItemDto.getProductId());
                 }
@@ -51,11 +49,10 @@ public class BasketController {
                 orderItems.add(orderItem);
             }
 
-            Basket Basket = new Basket();
-            Basket.setId((long) userInfo.getId());
-            Basket.setUserId((long) userInfo.getId());
-            Basket.setOrder(orderItems);
-            basketRepository.save(Basket);
+            Basket basket = new Basket();
+            basket.setUserId((long) userInfo.getId());
+            basket.setBasket(orderItems);
+            basketRepository.save(basket);
 
             return new ResponseEntity<>(orderDto, HttpStatus.OK);
         } else {
@@ -64,10 +61,10 @@ public class BasketController {
     }
 
     @GetMapping("/{orderId}")
-    public Object getOrder(@PathVariable Long orderId) {
-        Optional<Basket> orderOptional = basketRepository.findById(orderId);
+    public Object getBasketById(@PathVariable Long orderId) {
+        Optional<com.example.server.model.Basket> orderOptional = basketRepository.findById(orderId);
         if (orderOptional.isPresent()) {
-            Basket Basket = orderOptional.get();
+            com.example.server.model.Basket Basket = orderOptional.get();
             return new ResponseEntity<>(Basket, HttpStatus.OK);
         } else {
             return new ResponseStatusException(HttpStatus.NOT_FOUND, "Заказ с id " + orderId + " не найден");
@@ -75,12 +72,12 @@ public class BasketController {
     }
 
     @PutMapping("/{id}")
-    public Object updateOrder(@PathVariable Long id, @RequestBody OrderDto orderDto) {
+    public Object updateBasket(@PathVariable Long id, @RequestBody Basket orderDto) {
         if (basketRepository.existsById(id)) {
-            Basket Basket = basketRepository.findById(id).orElseThrow();
-            List<OrderItemDto> orderItemDtos = orderDto.getOrder();
+            com.example.server.model.Basket Basket = basketRepository.findById(id).orElseThrow();
+            List<BasketItem> orderItemDtos = orderDto.getBasket();
             List<BasketItem> orderItems = new ArrayList<>();
-            for (OrderItemDto orderItemDto : orderItemDtos) {
+            for (BasketItem orderItemDto : orderItemDtos) {
                 if (!cardRepository.existsById(orderItemDto.getProductId())) {
                     return new ResponseStatusException(HttpStatus.NOT_FOUND, "Нет продукта " + orderItemDto.getProductId());
                 }
@@ -89,7 +86,7 @@ public class BasketController {
                 orderItem.setQuantity(orderItemDto.getQuantity());
                 orderItems.add(orderItem);
             }
-            Basket.setOrder(orderItems);
+            Basket.setBasket(orderItems);
             basketRepository.save(Basket);
             return new ResponseEntity<>(orderDto, HttpStatus.OK);
         } else {
@@ -98,8 +95,8 @@ public class BasketController {
     }
 
     @DeleteMapping("/{orderId}")
-    public Object deleteOrder(@PathVariable Long orderId) {
-        Optional<Basket> orderOptional = basketRepository.findById(orderId);
+    public Object deleteBasket(@PathVariable Long orderId) {
+        Optional<com.example.server.model.Basket> orderOptional = basketRepository.findById(orderId);
         if (orderOptional.isPresent()) {
             basketRepository.deleteById(orderId);
             return new ResponseEntity<>(orderId, HttpStatus.OK);

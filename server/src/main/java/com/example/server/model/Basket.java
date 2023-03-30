@@ -11,13 +11,14 @@ import java.util.List;
 public class Basket {
 
     @Id
-    private Long id;
-
     @Column(name = "user_id")
     private Long userId;
 
     @ElementCollection(fetch = FetchType.EAGER)
     @CollectionTable(name = "basket_item", joinColumns = @JoinColumn(name = "basket_id"))
-    private List<BasketItem> order;
+    private List<BasketItem> basket;
 
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "orders_id")
+    private Order order;
 }
