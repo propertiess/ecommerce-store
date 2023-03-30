@@ -13,10 +13,7 @@ export const SwitcherThemeButton = () => {
   };
 
   return (
-    <Tooltip
-      label={colorScheme === 'light' ? 'Dark mode' : 'Light mode'}
-      withinPortal={true}
-    >
+    <Tooltip label={colorScheme === 'light' ? 'Dark mode' : 'Light mode'}>
       <Button variant='gradient' onClick={onChangeTheme}>
         {colorScheme === 'light' ? <Moon size={24} /> : <Sun size={24} />}
       </Button>

@@ -46,7 +46,7 @@ export const GoodsCard = <T extends Omit<Car, ''>>({
       </Card.Section>
       <Center mt='md'>
         {withToolTip && goods.title.length > maxLengthTitle ? (
-          <Tooltip label={goods.title} withinPortal={true}>
+          <Tooltip label={goods.title}>
             <Text weight={500}>
               {goods.title.slice(0, maxLengthTitle) + '...'}
             </Text>
