@@ -58,7 +58,6 @@ public class UserInfoController {
             user.setUsername(requestUser.getUsername());
             user.setPassword(passwordEncoder.encodePassword((requestUser.getPassword())));
             user.setRoles(requestUser.getRoles());
-
             UserInfo savedUser = userInfoService.addUserInfo(user);
             return new ResponseEntity<>(savedUser, HttpStatus.CREATED);
         } else {

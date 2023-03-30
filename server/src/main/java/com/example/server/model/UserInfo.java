@@ -26,7 +26,7 @@ public class UserInfo {
     @Column(name = "roles")
     private Role roles;
 
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "details_id")
     private UserDetails details;
 
