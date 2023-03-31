@@ -30,4 +30,15 @@ public class UserInfo {
     @JoinColumn(name = "details_id")
     private UserDetails details;
 
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "orders_id")
+    private Order historyOrder;
+
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "baskets_id")
+    private Basket basket;
+
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "liked_id")
+    private Liked liked;
 }

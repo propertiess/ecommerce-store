@@ -60,6 +60,8 @@ public class CardController {
                 existingProduct.setDescription(card.getDescription());
                 existingProduct.setPrice(card.getPrice());
                 existingProduct.setImg(card.getImg());
+                existingProduct.setCategory(card.getCategory());
+                existingProduct.setRating(card.getRating());
                 cardService.addCard(existingProduct);
                 return ResponseEntity.ok("Product updated successfully.");
             } else {

@@ -11,13 +11,13 @@ import java.util.List;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@Table(name = "orders")
-public class Order {
+@Table(name = "likeds")
+public class Liked {
     @Id
     @Column(name = "user_id")
     private Long userId;
 
     @ElementCollection(fetch = FetchType.EAGER)
-    @CollectionTable(name = "order_item", joinColumns = @JoinColumn(name = "order_id"))
-    private List<OrderItem> order;
+    @CollectionTable(name = "liked_item", joinColumns = @JoinColumn(name = "liked_id"))
+    private List<LikedItem> liked;
 }

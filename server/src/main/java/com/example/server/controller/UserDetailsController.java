@@ -38,6 +38,7 @@ public class UserDetailsController {
         UserInfo userInfo = userRepository.findById(userId);
         if (userInfo != null) {
             UserDetails userDetails = new UserDetails();
+            userDetails.setUserId(userId);
             userDetails.setFirstName(userDetailsRequest.getFirstName());
             userDetails.setLastName(userDetailsRequest.getLastName());
             userDetails.setEmail(userDetailsRequest.getEmail());

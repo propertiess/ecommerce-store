@@ -25,4 +25,11 @@ public class Card {
     @Column(name = "img")
     private String img;
 
+    @Column(name = "rating")
+    private Double rating;
+
+    @Column(name = "category")
+    @Enumerated(EnumType.STRING)
+    private Category category;
+
 }

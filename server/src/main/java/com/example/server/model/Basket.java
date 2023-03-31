@@ -18,7 +18,4 @@ public class Basket {
     @CollectionTable(name = "basket_item", joinColumns = @JoinColumn(name = "basket_id"))
     private List<BasketItem> basket;
 
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "orders_id")
-    private Order order;
 }

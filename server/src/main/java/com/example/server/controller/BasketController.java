@@ -53,6 +53,8 @@ public class BasketController {
             basket.setUserId((long) userInfo.getId());
             basket.setBasket(orderItems);
             basketRepository.save(basket);
+            userInfo.setBasket(basket);
+            userInfoRepository.save(userInfo);
 
             return new ResponseEntity<>(orderDto, HttpStatus.OK);
         } else {
@@ -74,7 +76,7 @@ public class BasketController {
     @PutMapping("/{id}")
     public Object updateBasket(@PathVariable Long id, @RequestBody Basket orderDto) {
         if (basketRepository.existsById(id)) {
-            com.example.server.model.Basket Basket = basketRepository.findById(id).orElseThrow();
+            Basket basket = basketRepository.findById(id).orElseThrow();
             List<BasketItem> orderItemDtos = orderDto.getBasket();
             List<BasketItem> orderItems = new ArrayList<>();
             for (BasketItem orderItemDto : orderItemDtos) {
@@ -86,8 +88,9 @@ public class BasketController {
                 orderItem.setQuantity(orderItemDto.getQuantity());
                 orderItems.add(orderItem);
             }
-            Basket.setBasket(orderItems);
-            basketRepository.save(Basket);
+
+            basket.setBasket(orderItems);
+            basketRepository.save(basket);
             return new ResponseEntity<>(orderDto, HttpStatus.OK);
         } else {
             return new ResponseStatusException(HttpStatus.NOT_FOUND, "Нет заказа " + id);
@@ -96,7 +99,7 @@ public class BasketController {
 
     @DeleteMapping("/{orderId}")
     public Object deleteBasket(@PathVariable Long orderId) {
-        Optional<com.example.server.model.Basket> orderOptional = basketRepository.findById(orderId);
+        Optional<Basket> orderOptional = basketRepository.findById(orderId);
         if (orderOptional.isPresent()) {
             basketRepository.deleteById(orderId);
             return new ResponseEntity<>(orderId, HttpStatus.OK);
