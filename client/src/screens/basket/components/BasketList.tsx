@@ -1,18 +1,15 @@
 import { Button, Center, Group, Loader, Text } from '@mantine/core';
 import { observer } from 'mobx-react-lite';
 
-import { TBasketItem } from '@/store/basket/Basket';
+import { useBasketStore } from '@/store/basket/Basket';
 import { convertCurrency } from '@/utils/helpers/convertCurrency';
 
 import { useBasketList } from '../hooks/useBasketList';
 
 import { BasketItem } from './BasketItem';
 
-type Props = {
-  basket: TBasketItem[];
-};
-
-export const BasketList = observer(({ basket }: Props) => {
+export const BasketList = observer(() => {
+  const { basket } = useBasketStore();
   const { basketItems, isFetching, totalPrice } = useBasketList(basket);
 
   if (isFetching) {

@@ -15,10 +15,19 @@ export const notAuthorizationLinks: TLink[] = [
   }
 ];
 
+export const authorizationLinksNavbar: TLink[] = notAuthorizationLinks.slice(
+  0,
+  notAuthorizationLinks.length - 2
+);
+
 export const authorizationLinks: TLink[] = [
   {
     title: 'Профиль',
     href: '/lk'
+  },
+  {
+    title: 'Избранное',
+    href: '/lk/liked'
   },
   {
     title: 'Корзина',

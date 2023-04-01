@@ -5,6 +5,9 @@ import { observer } from 'mobx-react-lite';
 import { Storage } from '@/utils/api/storage';
 import { AuthEnum } from '@/utils/consts';
 
+import { BasketProvider } from '../basket/BasketProvider';
+import { LikedProvider } from '../liked/LikedProvider';
+
 import { useAuthStore } from './Auth';
 
 type Props = PropsWithChildren;
@@ -21,5 +24,11 @@ export const AuthProvider = observer(({ children }: Props) => {
     setUser(getCookie(AuthEnum.TOKEN) as string, userId);
   }, [setUser]);
 
-  return <>{children}</>;
+  return (
+    <>
+      <BasketProvider>
+        <LikedProvider>{children}</LikedProvider>
+      </BasketProvider>
+    </>
+  );
 });

@@ -14,7 +14,12 @@ import { SwitcherThemeButton } from '@/components/SwitcherThemeButton';
 import { useAuthStore } from '@/store/auth/Auth';
 
 import { BurgerMenu } from './burger/BurgerMenu';
-import { Navbar, notAuthorizationLinks, privateLinks } from './navbar';
+import {
+  authorizationLinksNavbar,
+  Navbar,
+  notAuthorizationLinks,
+  privateLinks
+} from './navbar';
 import { UserAvatar } from './UserAvatar';
 
 export const Header = observer(() => {
@@ -25,6 +30,10 @@ export const Header = observer(() => {
   const chooseLinks = () => {
     if (isAdmin) {
       return privateLinks;
+    }
+
+    if (isUser) {
+      return authorizationLinksNavbar;
     }
 
     return notAuthorizationLinks;

@@ -14,7 +14,6 @@ import NextNProgress from 'nextjs-progressbar';
 
 import { useColorScheme } from '@/hooks/useColorScheme';
 import { AuthProvider } from '@/store/auth/AuthProvider';
-import { BasketProvider } from '@/store/basket/BasketProvider';
 
 import '@/styles/globals.css';
 
@@ -54,9 +53,7 @@ const App = (props: AppProps) => {
           <Notifications zIndex={2000} />
           <NextNProgress />
           <AuthProvider>
-            <BasketProvider>
-              <Component {...pageProps} />
-            </BasketProvider>
+            <Component {...pageProps} />
           </AuthProvider>
         </MantineProvider>
       </ColorSchemeProvider>
