@@ -1,28 +1,28 @@
 import { PropsWithChildren, useEffect } from 'react';
 import { observer } from 'mobx-react-lite';
 
-import { OrderService } from '@/services/order/order.service';
+import { BasketService } from '@/services/basket/basket.service';
 
 import { useAuthStore } from '../auth/Auth';
 
-import { useOrderStore } from './Order';
+import { useBasketStore } from './Basket';
 
 type Props = PropsWithChildren;
 
-export const OrderProvider = observer(({ children }: Props) => {
-  const { setOrder, order } = useOrderStore();
+export const BasketProvider = observer(({ children }: Props) => {
+  const { setBasket, basket } = useBasketStore();
   const { userId } = useAuthStore();
 
   useEffect(() => {
     if (!userId) {
-      order.length && setOrder([]);
+      basket.length && setBasket([]);
       return;
     }
 
     const fetch = async () => {
       try {
-        const orderDto = await OrderService.getByUserId(userId);
-        setOrder(orderDto.order);
+        const basketDto = await BasketService.get(userId);
+        setBasket(basketDto.basket);
       } catch (e) {
         console.error(e);
       }

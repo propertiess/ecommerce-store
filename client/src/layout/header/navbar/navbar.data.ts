@@ -19,7 +19,7 @@ export const authorizationLinks: TLink[] = [
   ...notAuthorizationLinks.slice().splice(0, notAuthorizationLinks.length - 1),
   {
     title: 'Корзина',
-    href: '/order'
+    href: '/basket'
   }
 ];
 

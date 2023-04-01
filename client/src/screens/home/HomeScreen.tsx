@@ -2,15 +2,15 @@ import { Grid } from '@mantine/core';
 import { observer } from 'mobx-react-lite';
 import { HomePageProps } from 'pages';
 
-import { TOrderItem, useOrderStore } from '@/store/order/Order';
+import { TBasketItem, useBasketStore } from '@/store/basket/Basket';
 
 import { ProductCard } from './components/product-card/ProductCard';
 
 export const HomeScreen = observer(({ products }: Required<HomePageProps>) => {
-  const { order, addItem, removeItem } = useOrderStore();
+  const { basket, addItem, removeItem } = useBasketStore();
 
   const onAdded = (id: number) => {
-    const item: TOrderItem = {
+    const item: TBasketItem = {
       productId: id,
       quantity: 1
     };
@@ -27,7 +27,7 @@ export const HomeScreen = observer(({ products }: Required<HomePageProps>) => {
         <Grid.Col key={product.id} span={12} xs={6} sm={4} xl={2}>
           <ProductCard
             product={product}
-            isAdded={!!order.find(item => item.productId === product.id)}
+            isAdded={!!basket.find(item => item.productId === product.id)}
             onAdded={onAdded}
             onCancel={onCancel}
           />

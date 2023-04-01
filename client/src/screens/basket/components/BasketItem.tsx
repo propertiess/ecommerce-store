@@ -3,17 +3,17 @@ import { observer } from 'mobx-react-lite';
 import Image from 'next/image';
 import { Minus, Plus } from 'tabler-icons-react';
 
-import { TOrderItem, useOrderStore } from '@/store/order/Order';
+import { TBasketItem, useBasketStore } from '@/store/basket/Basket';
 import { Product } from '@/types';
 import { convertCurrency } from '@/utils/helpers/convertCurrency';
 
 type Props = {
-  item: TOrderItem;
+  item: TBasketItem;
   products: Product[];
 };
 
-export const OrderItem = observer(({ item, products }: Props) => {
-  const { setItemQuantity, removeItem } = useOrderStore();
+export const BasketItem = observer(({ item, products }: Props) => {
+  const { setItemQuantity, removeItem } = useBasketStore();
 
   const product = products.find(el => el.id === item.productId)!;
 
