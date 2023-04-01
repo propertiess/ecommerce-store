@@ -2,7 +2,7 @@ import { instance } from '../api/main/instance';
 
 import { BasketDto } from './basket.dto';
 
-const endpoint = '/basket';
+const endpoint = '/baskets';
 
 export const BasketService = {
   async get(userId: number) {

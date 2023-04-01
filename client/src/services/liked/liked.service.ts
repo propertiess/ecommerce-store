@@ -2,7 +2,7 @@ import { instance } from '../api/main/instance';
 
 import { LikedDto } from './liked.dto';
 
-const endpoint = '/liked';
+const endpoint = '/likeds';
 
 export const LikedService = {
   async get(userId: number) {
