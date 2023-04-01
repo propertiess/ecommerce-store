@@ -53,11 +53,11 @@ class Basket {
       await BasketService.put(basketDto);
     } catch (e) {
       console.error(e);
-    }
-    try {
-      await BasketService.post(basketDto);
-    } catch (e) {
-      console.error(e);
+      try {
+        await BasketService.post(basketDto);
+      } catch (e) {
+        console.error(e);
+      }
     }
   };
 }
