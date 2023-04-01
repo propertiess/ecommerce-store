@@ -1,5 +1,6 @@
 package com.example.server.controller;
 
+import com.example.server.model.Basket;
 import com.example.server.model.OrderItem;
 import com.example.server.model.Order;
 import com.example.server.model.UserInfo;
@@ -17,7 +18,7 @@ import java.util.Optional;
 
 @CrossOrigin
 @RestController
-@RequestMapping("/api/v1/order")
+@RequestMapping("/api/v1/orders")
 public class OrderController {
 
     private final UserInfoRepository userInfoRepository;
@@ -30,7 +31,7 @@ public class OrderController {
     }
 
     @PostMapping()
-    public Object addBasket(@RequestBody Order orderDto) {
+    public Object addOrder(@RequestBody Order orderDto) {
         if (userInfoRepository.existsById(orderDto.getUserId())) {
             UserInfo userInfo = userInfoRepository.findById(orderDto.getUserId());
 
@@ -58,7 +59,7 @@ public class OrderController {
     }
 
     @GetMapping("/{orderId}")
-    public Object getBasketById(@PathVariable Long orderId) {
+    public Object getOrderById(@PathVariable Long orderId) {
         Optional<Order> orderOptional = orderRepository.findById(orderId);
         if (orderOptional.isPresent()) {
             Order order = orderOptional.get();
@@ -68,8 +69,18 @@ public class OrderController {
         }
     }
 
+    @GetMapping()
+    public Object getOrders() {
+        List<Order> orders = orderRepository.findAll();
+        if (!orders.isEmpty()) {
+            return new ResponseEntity<>(orders, HttpStatus.OK);
+        } else {
+            return new ResponseStatusException(HttpStatus.NOT_FOUND, "Orders " + orders + " пуст");
+        }
+    }
+
     @PutMapping("/{id}")
-    public Object updateBasket(@PathVariable Long id, @RequestBody Order orderDto) {
+    public Object updateOrderById(@PathVariable Long id, @RequestBody Order orderDto) {
         if (orderRepository.existsById(id)) {
             Order order = orderRepository.findById(id).orElseThrow();
             List<OrderItem> orderItemDtos = orderDto.getOrder();
@@ -91,7 +102,7 @@ public class OrderController {
     }
 
     @DeleteMapping("/{orderId}")
-    public Object deleteBasket(@PathVariable Long orderId) {
+    public Object deleteOrderById(@PathVariable Long orderId) {
         Optional<Order> orderOptional = orderRepository.findById(orderId);
         if (orderOptional.isPresent()) {
             orderRepository.deleteById(orderId);

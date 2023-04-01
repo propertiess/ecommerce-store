@@ -18,7 +18,7 @@ import java.util.Optional;
 
 @CrossOrigin
 @RestController
-@RequestMapping("/api/v1/basket")
+@RequestMapping("/api/v1/baskets")
 public class BasketController {
 
     private final UserInfoRepository userInfoRepository;
@@ -64,14 +64,25 @@ public class BasketController {
 
     @GetMapping("/{orderId}")
     public Object getBasketById(@PathVariable Long orderId) {
-        Optional<com.example.server.model.Basket> orderOptional = basketRepository.findById(orderId);
-        if (orderOptional.isPresent()) {
-            com.example.server.model.Basket Basket = orderOptional.get();
-            return new ResponseEntity<>(Basket, HttpStatus.OK);
+        Optional<Basket> basketOptional = basketRepository.findById(orderId);
+        if (basketOptional.isPresent()) {
+            Basket basket = basketOptional.get();
+            return new ResponseEntity<>(basket, HttpStatus.OK);
         } else {
             return new ResponseStatusException(HttpStatus.NOT_FOUND, "Заказ с id " + orderId + " не найден");
         }
     }
+
+    @GetMapping()
+    public Object getBasket() {
+        List<Basket> baskets = basketRepository.findAll();
+        if (!baskets.isEmpty()) {
+            return new ResponseEntity<>(baskets, HttpStatus.OK);
+        } else {
+            return new ResponseStatusException(HttpStatus.NOT_FOUND, "Basket " + baskets + " пуст");
+        }
+    }
+
 
     @PutMapping("/{id}")
     public Object updateBasket(@PathVariable Long id, @RequestBody Basket orderDto) {

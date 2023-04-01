@@ -1,6 +1,7 @@
 package com.example.server.controller;
 
 
+import com.example.server.model.Basket;
 import com.example.server.model.Liked;
 import com.example.server.model.LikedItem;
 import com.example.server.model.UserInfo;
@@ -19,7 +20,7 @@ import java.util.Optional;
 
 @CrossOrigin
 @RestController
-@RequestMapping("/api/v1/liked")
+@RequestMapping("/api/v1/likeds")
 public class LikedController {
 
     private final UserInfoRepository userInfoRepository;
@@ -71,6 +72,16 @@ public class LikedController {
             return new ResponseEntity<>(liked, HttpStatus.OK);
         } else {
             return new ResponseStatusException(HttpStatus.NOT_FOUND, "Избранные с id " + orderId + " не найден");
+        }
+    }
+
+    @GetMapping()
+    public Object getLiked() {
+        List<Liked> likeds = likedRepository.findAll();
+        if (!likeds.isEmpty()) {
+            return new ResponseEntity<>(likeds, HttpStatus.OK);
+        } else {
+            return new ResponseStatusException(HttpStatus.NOT_FOUND, "Liked " + likeds + " пуст");
         }
     }
 

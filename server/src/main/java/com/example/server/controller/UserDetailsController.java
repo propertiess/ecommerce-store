@@ -4,11 +4,13 @@ import com.example.server.model.UserDetails;
 import com.example.server.model.UserInfo;
 import com.example.server.service.userInfo.UserInfoRepository;
 import com.example.server.service.userdetails.UserDetailsRepository;
-import jakarta.persistence.criteria.CriteriaBuilder;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.server.ResponseStatusException;
 
+import java.util.List;
 import java.util.Optional;
 
 @CrossOrigin
@@ -30,6 +32,16 @@ public class UserDetailsController {
     public ResponseEntity<UserDetails> getUserDescriptionById(@PathVariable Long id) {
         Optional<UserDetails> UserDetails = userDetailsRepository.findById(Math.toIntExact(id));
         return UserDetails.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
+    }
+
+    @GetMapping()
+    public Object getOrders() {
+        List<UserDetails> userDetails = userDetailsRepository.findAll();
+        if (!userDetails.isEmpty()) {
+            return new ResponseEntity<>(userDetails, HttpStatus.OK);
+        } else {
+            return new ResponseStatusException(HttpStatus.NOT_FOUND, "UserDetails " + userDetails + " пуст");
+        }
     }
 
     // Создание описания пользователя
