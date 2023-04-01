@@ -6,8 +6,8 @@ export const notAuthorizationLinks: TLink[] = [
     href: '/'
   },
   {
-    title: 'Машины',
-    href: '/cars'
+    title: 'Купоны',
+    href: '/bonuses'
   },
   {
     title: 'Вход',

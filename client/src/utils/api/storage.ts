@@ -1,6 +1,6 @@
 import { checkAvailableStorage } from '../helpers/check-available-storage';
 
-export type StorageKeys = 'user-id';
+export type StorageKeys = 'user-id' | 'percent-discount';
 
 export const Storage = {
   getItem<T>(key: StorageKeys): T | undefined {

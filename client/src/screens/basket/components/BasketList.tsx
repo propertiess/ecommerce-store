@@ -9,8 +9,9 @@ import { useBasketList } from '../hooks/useBasketList';
 import { BasketItem } from './BasketItem';
 
 export const BasketList = observer(() => {
-  const { basket } = useBasketStore();
-  const { basketItems, isFetching, totalPrice } = useBasketList(basket);
+  const { basket, percentDiscount } = useBasketStore();
+  const { basketItems, isFetching, totalPrice, totalPriceWithBonus } =
+    useBasketList(basket, percentDiscount);
 
   if (isFetching) {
     return (
@@ -34,7 +35,17 @@ export const BasketList = observer(() => {
               />
             ))}
           <Group position='right' mt='md'>
-            <Text>Итоговая сумма: {convertCurrency(totalPrice)}</Text>
+            <Text>Итоговая сумма:</Text>
+            {percentDiscount ? (
+              <Group>
+                <Text className='line-through'>
+                  {convertCurrency(totalPrice)}
+                </Text>
+                <Text>{convertCurrency(totalPriceWithBonus)}</Text>
+              </Group>
+            ) : (
+              convertCurrency(totalPrice)
+            )}
             <Button variant='gradient'>Оплатить</Button>
           </Group>
         </>

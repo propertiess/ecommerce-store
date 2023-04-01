@@ -11,6 +11,7 @@ export type TBasketItem = {
 
 class Basket {
   basket: TBasketItem[] = [];
+  percentDiscount = 0;
 
   constructor() {
     makeAutoObservable(this);
@@ -35,6 +36,11 @@ class Basket {
 
   setBasket = (basket: TBasketItem[]) => {
     this.basket = basket;
+  };
+
+  setPercentDiscount = (percentDiscount: number) => {
+    this.percentDiscount = percentDiscount;
+    Storage.setItem('percent-discount', percentDiscount);
   };
 
   private mutateBasket = async (basket: TBasketItem[]) => {

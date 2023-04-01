@@ -3,7 +3,10 @@ import { TBasketItem } from '@/store/basket/Basket';
 
 import { BasketItemProps } from '../components/BasketItem';
 
-export const useBasketList = (basket: TBasketItem[]) => {
+export const useBasketList = (
+  basket: TBasketItem[],
+  percentDiscount: number
+) => {
   const { data, isFetching } = useGetProducts();
 
   const { basketItems, totalPrice } = (basket || []).reduce(
@@ -25,9 +28,12 @@ export const useBasketList = (basket: TBasketItem[]) => {
     { basketItems: [], totalPrice: 0 }
   );
 
+  const totalPriceWithBonus = (totalPrice * percentDiscount) / 100;
+
   return {
     basketItems,
     totalPrice,
+    totalPriceWithBonus,
     isFetching
   };
 };
