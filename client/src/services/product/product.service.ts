@@ -9,6 +9,11 @@ export const ProductService = {
     return data;
   },
 
+  async get(id: number) {
+    const { data } = await instance.get<Product>(`${endpoint}/${id}`);
+    return data;
+  },
+
   async delete(id: number) {
     const { data } = await instance.delete<Product>(`${endpoint}/${id}`);
     return data;

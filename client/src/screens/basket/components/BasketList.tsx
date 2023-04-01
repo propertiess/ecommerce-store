@@ -1,8 +1,10 @@
-import { Center, Loader } from '@mantine/core';
+import { Button, Center, Group, Loader, Text } from '@mantine/core';
 import { observer } from 'mobx-react-lite';
 
-import { useGetProducts } from '@/screens/home/hooks/useGetProducts';
 import { TBasketItem } from '@/store/basket/Basket';
+import { convertCurrency } from '@/utils/helpers/convertCurrency';
+
+import { useBasketList } from '../hooks/useBasketList';
 
 import { BasketItem } from './BasketItem';
 
@@ -11,7 +13,7 @@ type Props = {
 };
 
 export const BasketList = observer(({ basket }: Props) => {
-  const { data, isFetching } = useGetProducts();
+  const { basketItems, isFetching, totalPrice } = useBasketList(basket);
 
   if (isFetching) {
     return (
@@ -24,9 +26,21 @@ export const BasketList = observer(({ basket }: Props) => {
   return (
     <>
       {basket.length ? (
-        basket.map(item => (
-          <BasketItem key={item.productId} item={item} products={data!} />
-        ))
+        <>
+          {basket &&
+            basket.map(({ productId, quantity }, idx) => (
+              <BasketItem
+                key={productId}
+                {...basketItems[idx]}
+                productId={productId}
+                quantity={quantity}
+              />
+            ))}
+          <Group position='right' mt='md'>
+            <Text>Итоговая сумма: {convertCurrency(totalPrice)}</Text>
+            <Button variant='gradient'>Оплатить</Button>
+          </Group>
+        </>
       ) : (
         <Center className='mt-3'>Товаров нет!</Center>
       )}

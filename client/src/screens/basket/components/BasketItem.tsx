@@ -1,4 +1,4 @@
-import { Button, Flex, Group, Stack, Text } from '@mantine/core';
+import { Button, Flex, Group, Paper, Stack, Text } from '@mantine/core';
 import { observer } from 'mobx-react-lite';
 import Image from 'next/image';
 import { Minus, Plus } from 'tabler-icons-react';
@@ -7,47 +7,42 @@ import { TBasketItem, useBasketStore } from '@/store/basket/Basket';
 import { Product } from '@/types';
 import { convertCurrency } from '@/utils/helpers/convertCurrency';
 
-type Props = {
-  item: TBasketItem;
-  products: Product[];
-};
+export type BasketItemProps = Omit<Product, 'id'> & TBasketItem;
 
-export const BasketItem = observer(({ item, products }: Props) => {
+export const BasketItem = observer((props: BasketItemProps) => {
   const { setItemQuantity, removeItem } = useBasketStore();
 
-  const product = products.find(el => el.id === item.productId)!;
-
   const onMinusHandle = () => {
-    if (item.quantity === 1) {
-      removeItem(item.productId);
+    if (props.quantity === 1) {
+      removeItem(props.productId);
       return;
     }
 
-    setItemQuantity(item.productId, item.quantity - 1);
+    setItemQuantity(props.productId, props.quantity - 1);
   };
 
   return (
-    <Flex className='mt-5 justify-between rounded bg-main/20 p-3'>
+    <Paper className='mt-5 flex items-center justify-between' p='md' withBorder>
       <Flex>
         <Image
           className='object-contain'
           width={150}
           height={150}
-          src={product.img}
-          alt={product.title}
+          src={props.img}
+          alt={props.title}
         />
         <Stack>
-          <Text weight={500}>{product.title}</Text>
-          <Text>{product.description}</Text>
-          <Text>{convertCurrency(product.price)}</Text>
+          <Text weight={500}>{props.title}</Text>
+          <Text>{props.description}</Text>
+          <Text>{convertCurrency(props.price)}</Text>
         </Stack>
       </Flex>
       <Stack>
-        <Text>Количество товара: {item.quantity}</Text>
+        <Text>Количество товара: {props.quantity}</Text>
         <Group position='center'>
           <Button
             variant='gradient'
-            onClick={() => setItemQuantity(item.productId, item.quantity + 1)}
+            onClick={() => setItemQuantity(props.productId, props.quantity + 1)}
           >
             <Plus />
           </Button>
@@ -56,6 +51,6 @@ export const BasketItem = observer(({ item, products }: Props) => {
           </Button>
         </Group>
       </Stack>
-    </Flex>
+    </Paper>
   );
 });
