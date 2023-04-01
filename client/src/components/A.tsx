@@ -1,14 +1,17 @@
 import { PropsWithChildren } from 'react';
 import { Anchor, clsx } from '@mantine/core';
 import Link from 'next/link';
+import { useRouter } from 'next/router';
 
 type Props = PropsWithChildren & {
   href: string;
-  active: boolean;
   className?: string;
 };
 
-export const A = ({ children, href, active, className }: Props) => {
+export const A = ({ children, href, className }: Props) => {
+  const router = useRouter();
+  const active = router.asPath === href;
+
   return (
     <Anchor
       component={Link}

@@ -1,17 +1,13 @@
-import { Anchor, List, Navbar as MantineNavbar } from '@mantine/core';
-import { useRouter } from 'next/router';
+import { List, Navbar as MantineNavbar } from '@mantine/core';
 
 import { A } from '@/components/A';
 import { TLink } from '@/types';
 
 type Props = {
   links: TLink[];
-  onLogOut?: () => void;
 };
 
-export const Navbar = ({ links, onLogOut }: Props) => {
-  const router = useRouter();
-
+export const Navbar = ({ links }: Props) => {
   return (
     <MantineNavbar
       className='mr-32 w-fit border-0'
@@ -21,16 +17,9 @@ export const Navbar = ({ links, onLogOut }: Props) => {
       <List className='flex gap-10' listStyleType='none'>
         {links.map(link => (
           <List.Item key={link.title}>
-            <A active={router.asPath === link.href} href={link.href}>
-              {link.title}
-            </A>
+            <A href={link.href}>{link.title}</A>
           </List.Item>
         ))}
-        {onLogOut && (
-          <List.Item onClick={onLogOut}>
-            <Anchor component='div'>Выйти</Anchor>
-          </List.Item>
-        )}
       </List>
     </MantineNavbar>
   );

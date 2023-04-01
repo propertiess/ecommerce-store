@@ -16,15 +16,18 @@ export const notAuthorizationLinks: TLink[] = [
 ];
 
 export const authorizationLinks: TLink[] = [
-  ...notAuthorizationLinks.slice().splice(0, notAuthorizationLinks.length - 1),
+  {
+    title: 'Профиль',
+    href: '/lk'
+  },
   {
     title: 'Корзина',
-    href: '/basket'
+    href: '/lk/basket'
   }
 ];
 
 export const privateLinks: TLink[] = [
-  ...authorizationLinks,
+  ...notAuthorizationLinks.slice().splice(0, notAuthorizationLinks.length - 1),
   {
     title: 'Админ панель',
     href: '/admin'

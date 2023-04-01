@@ -14,25 +14,17 @@ import { SwitcherThemeButton } from '@/components/SwitcherThemeButton';
 import { useAuthStore } from '@/store/auth/Auth';
 
 import { BurgerMenu } from './burger/BurgerMenu';
-import {
-  authorizationLinks,
-  Navbar,
-  notAuthorizationLinks,
-  privateLinks
-} from './navbar';
+import { Navbar, notAuthorizationLinks, privateLinks } from './navbar';
+import { UserAvatar } from './UserAvatar';
 
 export const Header = observer(() => {
   const [burgerMenuOpened, { toggle }] = useDisclosure();
 
-  const { removeUser, isAdmin, isUser } = useAuthStore();
+  const { isAdmin, isUser } = useAuthStore();
 
   const chooseLinks = () => {
     if (isAdmin) {
       return privateLinks;
-    }
-
-    if (isUser) {
-      return authorizationLinks;
     }
 
     return notAuthorizationLinks;
@@ -47,10 +39,8 @@ export const Header = observer(() => {
       <Flex align='center' justify='space-between'>
         <Logo />
         <Group>
-          <Navbar
-            links={chooseLinks()}
-            onLogOut={isAdmin || isUser ? removeUser : undefined}
-          />
+          <Navbar links={chooseLinks()} />
+          {(isAdmin || isUser) && <UserAvatar />}
           <SwitcherThemeButton />
           <MediaQuery largerThan='sm' styles={{ display: 'none' }}>
             <Burger opened={burgerMenuOpened} onClick={toggle} />
@@ -60,7 +50,6 @@ export const Header = observer(() => {
           opened={burgerMenuOpened}
           onChange={toggle}
           links={chooseLinks()}
-          onLogOut={isAdmin || isUser ? removeUser : undefined}
         />
       </Flex>
     </MantineHeader>
