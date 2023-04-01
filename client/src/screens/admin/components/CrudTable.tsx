@@ -19,7 +19,18 @@ export const CrudTable = <T extends { id: number }>({
   onDelete
 }: Props<T>) => {
   const keys = useMemo(() => {
-    return Object.keys(data?.[0] ?? {});
+    const result: string[] = [];
+    if (!data?.[0]) {
+      return result;
+    }
+
+    for (const key in data[0]) {
+      if (typeof data[0][key] === 'object') {
+        continue;
+      }
+      result.push(key);
+    }
+    return result;
   }, [data]);
 
   return (
