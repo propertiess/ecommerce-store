@@ -24,6 +24,7 @@ export const BasketAndLikedButtons = (props: Props) => {
               ? 'Убрать товар из избранного'
               : 'Добавить товар в избранное'
           }
+          withinPortal={true}
         >
           <Button
             variant='light'
@@ -45,6 +46,7 @@ export const BasketAndLikedButtons = (props: Props) => {
               ? 'Убрать товар из корзины'
               : 'Добавить товар в корзину'
           }
+          withinPortal={true}
         >
           <Button
             variant='light'

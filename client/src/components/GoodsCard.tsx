@@ -71,6 +71,7 @@ export const GoodsCard = ({
             length={maxLengthTitle}
             withTooltip={withToolTip}
             href={props.href}
+            withinPortal={true}
             as='a'
           />
         ) : (

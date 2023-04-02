@@ -9,10 +9,12 @@ type Props = {
   as?: 'text' | 'a';
   href?: string;
   withTooltip?: boolean;
+  withinPortal?: boolean;
 };
 
 export const CutTooltip = ({
   withTooltip = false,
+  withinPortal,
   as = 'text',
   length,
   ...props
@@ -29,7 +31,7 @@ export const CutTooltip = ({
   return (
     <>
       {withTooltip && props.title.length > length ? (
-        <Tooltip label={props.title}>
+        <Tooltip label={props.title} withinPortal={withinPortal}>
           <Text>
             <Component>{props.title.slice(0, length) + '...'}</Component>
           </Text>
