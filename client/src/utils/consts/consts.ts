@@ -1,8 +1,9 @@
-import { Category, Role } from '@/types';
+import { Category, Role, TUserDetails } from '@/types';
 
 export const QueryKeys = {
   products: 'products',
-  users: 'users'
+  users: 'users',
+  'users-details': ' users-details'
 } as const;
 
 export const AuthEnum = {
@@ -20,3 +21,20 @@ export const ProductCategories: Category[] = [
   'JEWELERY',
   'WATCHES'
 ];
+
+export const DetailsDictionary: Record<
+  keyof Omit<TUserDetails, 'userId'>,
+  string
+> = {
+  email: 'Почта',
+  firstName: 'Имя',
+  lastName: 'Фамилия',
+  phone: 'Телефонный номер'
+};
+
+export const initialFieldsUserDetails = {
+  email: '',
+  firstName: '',
+  lastName: '',
+  phone: ''
+};

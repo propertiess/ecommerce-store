@@ -18,6 +18,15 @@ export type User = {
   password: string;
   roles: Role;
 };
+
+export type TUserDetails = {
+  userId: number;
+  firstName: string;
+  lastName: string;
+  email: string;
+  phone: string;
+};
+
 export type AuthUser = Omit<User, 'id' | 'roles'>;
 
 export type Role = 'USER' | 'ADMIN';
