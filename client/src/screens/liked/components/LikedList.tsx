@@ -31,7 +31,7 @@ export const LikedList = observer(() => {
             ))}
         </>
       ) : (
-        <Center className='mt-3'>Товаров нет!</Center>
+        <Center className='mt-3'>Список товаров пуст</Center>
       )}
     </>
   );

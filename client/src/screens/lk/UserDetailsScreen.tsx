@@ -1,4 +1,4 @@
-import { Button, Grid, Group, Modal, Stack, Text } from '@mantine/core';
+import { Button, Grid, Group, Modal, Stack, Text, Title } from '@mantine/core';
 import { useDisclosure } from '@mantine/hooks';
 import { observer } from 'mobx-react-lite';
 
@@ -26,6 +26,7 @@ export const UserDetailsScreen = observer(() => {
 
   return (
     <Layout title='Личный кабинет'>
+      <Title mt='md'>Профиль</Title>
       {details && (
         <Stack mt='md'>
           <Stack>
