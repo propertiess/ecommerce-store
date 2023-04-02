@@ -1,4 +1,4 @@
-import { Button, Flex, Group, Paper, Stack, Text } from '@mantine/core';
+import { Button, Grid, Group, Paper, Text } from '@mantine/core';
 import { observer } from 'mobx-react-lite';
 import Image from 'next/image';
 import { Minus, Plus } from 'tabler-icons-react';
@@ -22,35 +22,47 @@ export const BasketItem = observer((props: BasketItemProps) => {
   };
 
   return (
-    <Paper className='mt-5 flex items-center justify-between' p='md' withBorder>
-      <Flex>
-        <Image
-          className='object-contain'
-          width={150}
-          height={150}
-          src={props.img}
-          alt={props.title}
-        />
-        <Stack>
-          <Text weight={500}>{props.title}</Text>
+    <Paper
+      className='mt-5 flex flex-wrap items-center justify-between gap-3'
+      p='md'
+      withBorder
+    >
+      <Grid className='w-full'>
+        <Grid.Col span={12} md={2}>
+          <Image
+            className='object-contain'
+            width={150}
+            height={150}
+            src={props.img}
+            alt={props.title}
+          />
+        </Grid.Col>
+        <Grid.Col span={12} md={6}>
+          <Text weight={500} fz='lg'>
+            {props.title}
+          </Text>
           <Text>{props.description}</Text>
           <Text>{convertCurrency(props.price)}</Text>
-        </Stack>
-      </Flex>
-      <Stack>
-        <Text>Количество товара: {props.quantity}</Text>
-        <Group position='center'>
-          <Button
-            variant='gradient'
-            onClick={() => setItemQuantity(props.productId, props.quantity + 1)}
-          >
-            <Plus />
-          </Button>
-          <Button variant='gradient' onClick={onMinusHandle}>
-            <Minus />
-          </Button>
-        </Group>
-      </Stack>
+        </Grid.Col>
+        <Grid.Col span={12} md={4}>
+          <Group position='right'>
+            <Text>Количество товара: {props.quantity}</Text>
+            <Group position='center'>
+              <Button
+                variant='gradient'
+                onClick={() =>
+                  setItemQuantity(props.productId, props.quantity + 1)
+                }
+              >
+                <Plus />
+              </Button>
+              <Button variant='gradient' onClick={onMinusHandle}>
+                <Minus />
+              </Button>
+            </Group>
+          </Group>
+        </Grid.Col>
+      </Grid>
     </Paper>
   );
 });

@@ -34,6 +34,11 @@ class Basket {
     this.mutateBasket(this.basket);
   };
 
+  clearBasket = () => {
+    this.basket = [];
+    this.mutateBasket(this.basket);
+  };
+
   setBasket = (basket: TBasketItem[]) => {
     this.basket = basket;
   };

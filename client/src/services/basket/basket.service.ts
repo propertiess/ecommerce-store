@@ -19,7 +19,7 @@ export const BasketService = {
   },
 
   async post(dto: BasketDto) {
-    const { data } = await instance.post<BasketDto>(`${endpoint}`, dto);
+    const { data } = await instance.post<BasketDto>(endpoint, dto);
     return data;
   }
 };

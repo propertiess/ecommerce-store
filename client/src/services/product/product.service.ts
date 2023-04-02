@@ -28,7 +28,7 @@ export const ProductService = {
   },
 
   async post(newProduct: Omit<Product, 'id'>) {
-    const { data } = await instance.post<Product>(`${endpoint}`, newProduct);
+    const { data } = await instance.post<Product>(endpoint, newProduct);
     return data;
   }
 };

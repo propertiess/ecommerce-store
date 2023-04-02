@@ -9,6 +9,7 @@ import { AuthEnum } from '@/utils/consts';
 
 import { BasketProvider } from '../basket/BasketProvider';
 import { LikedProvider } from '../liked/LikedProvider';
+import { OrderProvider } from '../order/OrderProvider';
 
 import { useAuthStore } from './Auth';
 
@@ -35,9 +36,11 @@ export const AuthProvider = observer(
 
     return (
       <>
-        <BasketProvider>
-          <LikedProvider>{children}</LikedProvider>
-        </BasketProvider>
+        <OrderProvider>
+          <BasketProvider>
+            <LikedProvider>{children}</LikedProvider>
+          </BasketProvider>
+        </OrderProvider>
       </>
     );
   }

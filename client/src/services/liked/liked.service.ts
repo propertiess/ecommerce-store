@@ -19,7 +19,7 @@ export const LikedService = {
   },
 
   async post(dto: LikedDto) {
-    const { data } = await instance.post<LikedDto>(`${endpoint}`, dto);
+    const { data } = await instance.post<LikedDto>(endpoint, dto);
     return data;
   }
 };

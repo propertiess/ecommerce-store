@@ -26,7 +26,9 @@ export const useBasketList = () => {
     { basketItems: [], totalPrice: 0 }
   );
 
-  const totalPriceWithBonus = (totalPrice * percentDiscount) / 100;
+  const totalPriceWithBonus = percentDiscount
+    ? (totalPrice * percentDiscount) / 100
+    : totalPrice;
 
   return {
     basket,
