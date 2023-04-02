@@ -44,7 +44,7 @@ const ProductsDetailsPage = observer(() => {
           <Group position='right' mt='md'>
             <Button onClick={() => router.push('/')}>Назад</Button>
           </Group>
-          <Flex wrap='wrap' justify='center' mt='md' gap='sm'>
+          <Flex wrap='wrap' justify='center' my='md' gap='sm'>
             <Stack>
               <Image
                 width={300}
