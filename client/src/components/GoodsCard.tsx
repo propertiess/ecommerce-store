@@ -18,6 +18,8 @@ import {
 import { Product } from '@/types';
 import { convertCurrency } from '@/utils/helpers/convertCurrency';
 
+import { PromptTooltipOnDisabled } from './PromptTooltip';
+
 export type GoodsCardProps = Product & {
   withToolTip?: boolean;
   maxLengthTitle?: number;
@@ -71,35 +73,41 @@ export const GoodsCard = ({
           <Text weight={500}>{props.title}</Text>
         )}
       </Center>
-      <Group grow align='center' mt='md'>
-        <Text>{convertCurrency(props.price)}</Text>
-        <Button
-          variant='light'
-          color={props.isInLiked ? 'red' : 'blue'}
-          onClick={
-            props.isInLiked
-              ? () => props.onCancelLiked(props.id)
-              : () => props.onAddedToLiked(props.id)
-          }
-          radius='md'
-          disabled={disabled}
-        >
-          {props.isInLiked ? <HeartOff /> : <HeartPlus />}
-        </Button>
-        <Button
-          variant='light'
-          color={props.isInBasket ? 'red' : 'blue'}
-          onClick={
-            props.isInBasket
-              ? () => props.onCancelBasket(props.id)
-              : () => props.onAddedToBasket(props.id)
-          }
-          radius='md'
-          disabled={disabled}
-        >
-          {props.isInBasket ? <ShoppingCartOff /> : <ShoppingCartPlus />}
-        </Button>
-      </Group>
+      <PromptTooltipOnDisabled
+        label='Для того чтобы добавить товар в корзину или избранное нужно зарегистрироваться!'
+        disabled={disabled}
+      >
+        <Group grow align='center' mt='md'>
+          <Text>{convertCurrency(props.price)}</Text>
+
+          <Button
+            variant='light'
+            color={props.isInLiked ? 'red' : 'blue'}
+            onClick={
+              props.isInLiked
+                ? () => props.onCancelLiked(props.id)
+                : () => props.onAddedToLiked(props.id)
+            }
+            radius='md'
+            disabled={disabled}
+          >
+            {props.isInLiked ? <HeartOff /> : <HeartPlus />}
+          </Button>
+          <Button
+            variant='light'
+            color={props.isInBasket ? 'red' : 'blue'}
+            onClick={
+              props.isInBasket
+                ? () => props.onCancelBasket(props.id)
+                : () => props.onAddedToBasket(props.id)
+            }
+            radius='md'
+            disabled={disabled}
+          >
+            {props.isInBasket ? <ShoppingCartOff /> : <ShoppingCartPlus />}
+          </Button>
+        </Group>
+      </PromptTooltipOnDisabled>
     </Card>
   );
 };

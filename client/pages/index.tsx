@@ -1,5 +1,4 @@
-import { Center, Loader } from '@mantine/core';
-
+import { CenteredLoader } from '@/components/CenteredLoader';
 import { Layout } from '@/layout';
 import { HomeScreen } from '@/screens/home';
 import { useGetProducts } from '@/screens/home/hooks/useGetProducts';
@@ -17,9 +16,7 @@ const Home = () => {
       {!isFetching ? (
         <>{data && <HomeScreen products={data} />}</>
       ) : (
-        <Center className='mt-3'>
-          <Loader />
-        </Center>
+        <CenteredLoader />
       )}
     </Layout>
   );

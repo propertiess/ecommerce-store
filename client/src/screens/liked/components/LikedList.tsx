@@ -1,6 +1,7 @@
-import { Center, Loader } from '@mantine/core';
+import { Center } from '@mantine/core';
 import { observer } from 'mobx-react-lite';
 
+import { CenteredLoader } from '@/components/CenteredLoader';
 import { useLikedStore } from '@/store/liked/Liked';
 
 import { useLikedList } from '../hooks/useLikedList';
@@ -12,11 +13,7 @@ export const LikedList = observer(() => {
   const { likedItems, isFetching } = useLikedList(liked);
 
   if (isFetching) {
-    return (
-      <Center className='mt-3'>
-        <Loader />
-      </Center>
-    );
+    return <CenteredLoader />;
   }
 
   return (
