@@ -1,8 +1,6 @@
-import { Button, Card, Group, Title } from '@mantine/core';
+import { Button, Card, Group, Title, Tooltip } from '@mantine/core';
 import Image from 'next/image';
 import { Discount, DiscountOff } from 'tabler-icons-react';
-
-import { PromptTooltipOnNotDisabled } from '@/components/PromptTooltip';
 
 import { Bonus } from '../types';
 
@@ -22,11 +20,15 @@ export const BonusCard = (props: Props) => {
         alt={props.title}
       />
       <Title>Скидка {props.title}</Title>
-      <Group mt='md'>
-        <PromptTooltipOnNotDisabled
-          label='Выбрать купон можно один раз. Данное действие нельзя будет повторить!'
-          disabled={props.disabled}
-        >
+      <Tooltip
+        label={
+          props.disabled
+            ? 'Купоны больше недоступны для Вашего аккаунта, либо нужно пройти регистрацию!'
+            : 'Выбрать купон можно один раз. Данное действие нельзя будет повторить!'
+        }
+        withinPortal={true}
+      >
+        <Group mt='md'>
           <Button
             onClick={() => props.onAddedBonus(parseInt(props.title))}
             fullWidth={true}
@@ -34,8 +36,8 @@ export const BonusCard = (props: Props) => {
           >
             {props.disabled ? <DiscountOff /> : <Discount />}
           </Button>
-        </PromptTooltipOnNotDisabled>
-      </Group>
+        </Group>
+      </Tooltip>
     </Card>
   );
 };

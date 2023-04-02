@@ -1,9 +1,10 @@
-import { Card, Center, Stack, Text } from '@mantine/core';
+import { Card, Center, Group, Rating, Stack, Text } from '@mantine/core';
 import Image from 'next/image';
 
 import { Product } from '@/types';
 import { convertCurrency } from '@/utils/helpers/convertCurrency';
 
+import { A } from './A';
 import { BasketAndLikedButtons } from './BasketAndLikedButtons';
 import { CutTooltip } from './CutTooltip';
 
@@ -42,13 +43,25 @@ export const GoodsCard = ({
     <Card withBorder h='100%'>
       <Card.Section pt='sm'>
         <Stack className='relative mx-auto h-52'>
-          <Image
-            className='object-contain'
-            sizes='100%'
-            src={props.img}
-            alt={props.title}
-            fill={true}
-          />
+          {props.href ? (
+            <A href={props.href}>
+              <Image
+                className='object-contain'
+                sizes='100%'
+                src={props.img}
+                alt={props.title}
+                fill={true}
+              />
+            </A>
+          ) : (
+            <Image
+              className='object-contain'
+              sizes='100%'
+              src={props.img}
+              alt={props.title}
+              fill={true}
+            />
+          )}
         </Stack>
       </Card.Section>
       <Center mt='md'>
@@ -71,10 +84,12 @@ export const GoodsCard = ({
 
       <Stack
         mt='md'
-        className='flex flex-row items-center justify-between gap-2'
+        className='flex flex-row flex-wrap items-center justify-between gap-2'
       >
+        {props.rating && <Rating value={props.rating} readOnly={true} />}
         <Text>{convertCurrency(props.price)}</Text>
-
+      </Stack>
+      <Group mt='md' position='right'>
         <BasketAndLikedButtons
           id={props.id}
           isInBasket={props.isInBasket}
@@ -85,7 +100,7 @@ export const GoodsCard = ({
           onCancelLiked={props.onCancelLiked}
           disabled={disabled}
         />
-      </Stack>
+      </Group>
     </Card>
   );
 };

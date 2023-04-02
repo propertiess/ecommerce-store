@@ -1,4 +1,4 @@
-import { Button, Group } from '@mantine/core';
+import { Button, Group, Tooltip } from '@mantine/core';
 import {
   HeartOff,
   HeartPlus,
@@ -18,32 +18,48 @@ export const BasketAndLikedButtons = (props: Props) => {
       disabled={props.disabled}
     >
       <Group>
-        <Button
-          variant='light'
-          color={props.isInLiked ? 'red' : 'blue'}
-          onClick={
+        <Tooltip
+          label={
             props.isInLiked
-              ? () => props.onCancelLiked(props.id)
-              : () => props.onAddedToLiked(props.id)
+              ? 'Убрать товар из избранного'
+              : 'Добавить товар в избранное'
           }
-          radius='md'
-          disabled={props.disabled}
         >
-          {props.isInLiked ? <HeartOff /> : <HeartPlus />}
-        </Button>
-        <Button
-          variant='light'
-          color={props.isInBasket ? 'red' : 'blue'}
-          onClick={
+          <Button
+            variant='light'
+            color={props.isInLiked ? 'red' : 'blue'}
+            onClick={
+              props.isInLiked
+                ? () => props.onCancelLiked(props.id)
+                : () => props.onAddedToLiked(props.id)
+            }
+            radius='md'
+            disabled={props.disabled}
+          >
+            {props.isInLiked ? <HeartOff /> : <HeartPlus />}
+          </Button>
+        </Tooltip>
+        <Tooltip
+          label={
             props.isInBasket
-              ? () => props.onCancelBasket(props.id)
-              : () => props.onAddedToBasket(props.id)
+              ? 'Убрать товар из корзины'
+              : 'Добавить товар в корзину'
           }
-          radius='md'
-          disabled={props.disabled}
         >
-          {props.isInBasket ? <ShoppingCartOff /> : <ShoppingCartPlus />}
-        </Button>
+          <Button
+            variant='light'
+            color={props.isInBasket ? 'red' : 'blue'}
+            onClick={
+              props.isInBasket
+                ? () => props.onCancelBasket(props.id)
+                : () => props.onAddedToBasket(props.id)
+            }
+            radius='md'
+            disabled={props.disabled}
+          >
+            {props.isInBasket ? <ShoppingCartOff /> : <ShoppingCartPlus />}
+          </Button>
+        </Tooltip>
       </Group>
     </PromptTooltipOnDisabled>
   );
