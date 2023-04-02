@@ -1,4 +1,4 @@
-import { Card, Center, Flex, Stack, Text } from '@mantine/core';
+import { Card, Center, Stack, Text } from '@mantine/core';
 import Image from 'next/image';
 
 import { Product } from '@/types';
@@ -69,7 +69,10 @@ export const GoodsCard = ({
         )}
       </Center>
 
-      <Flex align='center' justify='space-between' mt='md'>
+      <Stack
+        mt='md'
+        className='flex flex-row items-center justify-between gap-2'
+      >
         <Text>{convertCurrency(props.price)}</Text>
 
         <BasketAndLikedButtons
@@ -82,7 +85,7 @@ export const GoodsCard = ({
           onCancelLiked={props.onCancelLiked}
           disabled={disabled}
         />
-      </Flex>
+      </Stack>
     </Card>
   );
 };

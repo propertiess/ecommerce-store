@@ -16,7 +16,7 @@ export const HomeScreen = observer(({ products }: Required<HomePageProps>) => {
   return (
     <Grid py='md'>
       {products.map(product => (
-        <Grid.Col key={product.id} span={12} xs={6} sm={4} xl={2}>
+        <Grid.Col key={product.id} span={12} xs={6} sm={4} lg={3}>
           <ProductCard
             product={product}
             href={`/products/${product.id}`}
