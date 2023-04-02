@@ -5,13 +5,11 @@ import { useRouter } from 'next/router';
 
 import { BasketAndLikedButtons } from '@/components/BasketAndLikedButtons';
 import { CenteredLoader } from '@/components/CenteredLoader';
+import { useBasketAndLikedMethods } from '@/hooks/useBasketAndLiked';
 import { Layout } from '@/layout';
 import { useBasketList } from '@/screens/basket/hooks/useBasketList';
 import { useGetProduct } from '@/screens/home/hooks/useGetProducts';
 import { useLikedList } from '@/screens/liked/hooks/useLikedList';
-import { useAuthStore } from '@/store/auth/Auth';
-import { useBasketStore } from '@/store/basket/Basket';
-import { useLikedStore } from '@/store/liked/Liked';
 import { convertCurrency } from '@/utils/helpers/convertCurrency';
 
 const ProductsDetailsPage = observer(() => {
@@ -22,12 +20,8 @@ const ProductsDetailsPage = observer(() => {
 
   const { data: product, isFetching } = useGetProduct(productId);
 
-  const { userId } = useAuthStore();
+  const basketAndLikedMethods = useBasketAndLikedMethods();
 
-  const { addItem: addItemToBasket, removeItem: removeItemFromBasket } =
-    useBasketStore();
-  const { addItem: addItemToLiked, removeItem: removeItemFromLiked } =
-    useLikedStore();
   const { basketItems } = useBasketList();
   const { likedItems } = useLikedList();
 
@@ -75,13 +69,7 @@ const ProductsDetailsPage = observer(() => {
                 id={product.id}
                 isInBasket={isInBasket}
                 isInLiked={isInLiked}
-                onAddedToBasket={id =>
-                  addItemToBasket({ productId: id, quantity: 1 })
-                }
-                onCancelBasket={removeItemFromBasket}
-                onAddedToLiked={id => addItemToLiked({ productId: id })}
-                onCancelLiked={removeItemFromLiked}
-                disabled={!userId}
+                {...basketAndLikedMethods}
               />
             </Stack>
           </Flex>
