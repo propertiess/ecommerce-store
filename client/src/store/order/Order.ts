@@ -3,6 +3,10 @@ import { makeAutoObservable } from 'mobx';
 import { OrderDto } from '@/services/order/order.dto';
 import { OrderService } from '@/services/order/order.service';
 import { Storage } from '@/utils/api/storage';
+import {
+  showErrorNotification,
+  showSuccessNotification
+} from '@/utils/helpers/notifications';
 
 export type TOrderItem = {
   id: number;
@@ -17,20 +21,27 @@ class Order {
     makeAutoObservable(this);
   }
 
-  addItem = (item: TOrderItem) => {
+  addItem = async (item: TOrderItem): Promise<boolean> => {
     this.order.push(item);
-    this.mutateOrder(this.order);
+    const result = await this.mutateOrder(this.order);
+
+    if (result) {
+      return result;
+    }
+
+    this.order.pop();
+    return false;
   };
 
   setOrder = (order: TOrderItem[]) => {
     this.order = order;
   };
 
-  private mutateOrder = async (order: TOrderItem[]) => {
+  private mutateOrder = async (order: TOrderItem[]): Promise<boolean> => {
     const userId = Storage.getItem<string>('user-id');
 
     if (!userId) {
-      return;
+      return false;
     }
 
     const orderDto: OrderDto = {
@@ -40,12 +51,18 @@ class Order {
 
     try {
       await OrderService.put(orderDto);
+      showSuccessNotification('Заказ успешно оформлен!');
+      return true;
     } catch (e) {
       console.error(e);
       try {
         await OrderService.post(orderDto);
+        showSuccessNotification('Заказ успешно оформлен!');
+        return true;
       } catch (e) {
         console.error(e);
+        showErrorNotification('Не удалось оформить заказ!');
+        return false;
       }
     }
   };

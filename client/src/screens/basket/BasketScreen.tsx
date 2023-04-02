@@ -11,7 +11,7 @@ import { BasketList } from './components/BasketList';
 import { useBasketList } from './hooks/useBasketList';
 
 export const BasketScreen = observer(() => {
-  const [isLoading, { toggle }] = useDisclosure(false);
+  const [isLoading, { open, close }] = useDisclosure(false);
   const { basket, percentDiscount, totalPrice, totalPriceWithBonus } =
     useBasketList();
 
@@ -19,9 +19,9 @@ export const BasketScreen = observer(() => {
   const { addItem } = useOrderStore();
 
   const onBuyHandler = async () => {
-    toggle();
+    open();
 
-    addItem({
+    const isSuccessOrder = await addItem({
       id: getRandomNumber(0, 1000),
       status: 'Buy',
       totalPrice: totalPriceWithBonus
@@ -33,8 +33,11 @@ export const BasketScreen = observer(() => {
       }, 1500);
     });
 
-    clearBasket();
-    toggle();
+    if (isSuccessOrder) {
+      clearBasket();
+    }
+
+    close();
   };
 
   return (
