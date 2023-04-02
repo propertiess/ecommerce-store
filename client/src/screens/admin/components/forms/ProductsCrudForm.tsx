@@ -1,8 +1,9 @@
-import { Button, Group, NumberInput, TextInput } from '@mantine/core';
+import { Button, Group, NumberInput, Select, TextInput } from '@mantine/core';
 import { useForm, zodResolver } from '@mantine/form';
 import { z } from 'zod';
 
 import { Product } from '@/types';
+import { ProductCategories } from '@/utils/consts';
 
 const schema = z.object({
   title: z
@@ -10,11 +11,14 @@ const schema = z.object({
     .min(5, { message: 'Название товара должно иметь больше 5 символов' }),
   description: z
     .string()
-    .min(10, { message: 'Описание товара должно иметь больше 10 символов' }),
+    .min(10, { message: 'Описание товара должно иметь больше 10 символов' })
+    .max(100, { message: 'Описание товара должно быть меньше 100 символов' }),
   img: z.string().url(),
   price: z
     .number()
-    .min(100, { message: 'Значение цены должно быть больше 100' })
+    .min(100, { message: 'Значение цены должно быть больше 100' }),
+  category: z.string(),
+  rating: z.number()
 });
 
 type Props = {
@@ -22,13 +26,20 @@ type Props = {
   onSave: (product: Product | Omit<Product, 'id'>) => void;
 };
 
+const categoryData = ProductCategories.map(category => ({
+  value: category,
+  label: category
+}));
+
 export const ProductsCrudForm = ({ product, onSave }: Props) => {
   const form = useForm<Product | Omit<Product, 'id'>>({
     initialValues: product ?? {
       title: '',
       img: '',
       price: 0,
-      description: ''
+      description: '',
+      category: 'MEN',
+      rating: 0
     },
     validate: zodResolver(schema)
   });
@@ -43,6 +54,13 @@ export const ProductsCrudForm = ({ product, onSave }: Props) => {
       />
       <NumberInput label='price' mt='sm' {...form.getInputProps('price')} />
       <TextInput label='img' mt='sm' {...form.getInputProps('img')} />
+      <NumberInput label='rating' mt='sm' {...form.getInputProps('rating')} />
+      <Select
+        label='category'
+        data={categoryData}
+        mt='sm'
+        {...form.getInputProps('category')}
+      />
       <Group position='right' mt='xl'>
         <Button type='submit'>Сохранить</Button>
       </Group>

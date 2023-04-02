@@ -1,4 +1,4 @@
-import { Role } from '@/types';
+import { Category, Role } from '@/types';
 
 export const QueryKeys = {
   products: 'products',
@@ -13,3 +13,10 @@ export const RoleEnum: Record<Role, Role> = {
   USER: 'USER',
   ADMIN: 'ADMIN'
 } as const;
+
+export const ProductCategories: Category[] = [
+  'MEN',
+  'WOMEN',
+  'JEWELERY',
+  'WATCHES'
+];

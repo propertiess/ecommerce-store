@@ -10,7 +10,7 @@ export type Product = {
   category: Category;
 };
 
-export type Category = 'MEN' | 'WOMEN';
+export type Category = 'MEN' | 'WOMEN' | 'JEWELERY' | 'WATCHES';
 
 export type User = {
   id: number;
