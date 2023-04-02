@@ -1,0 +1,52 @@
+{
+    "name": "user-service",
+    "version": "1.0.0",
+    "description": "",
+    "main": "src/server.js",
+    "type": "module",
+    "keywords": [],
+    "author": "",
+    "license": "ISC",
+    "dependencies": {
+        "cors": "^2.8.5",
+        "express": "^4.18.2",
+        "mongodb": "^5.1.0",
+        "mongoose": "^7.0.3"
+    },
+    "devDependencies": {
+        "eslint": "^8.36.0"
+    },
+    "eslintConfig": {
+        "env": {
+            "node": true
+        },
+        "extends": [
+            "eslint:recommended"
+        ],
+        "overrides": [],
+        "parserOptions": {
+            "sourceType": "module",
+            "ecmaVersion": "latest"
+        },
+        "rules": {
+            "indent": [
+                "error",
+                4
+            ],
+            "quotes": [
+                "error",
+                "single"
+            ],
+            "semi": [
+                "error",
+                "always"
+            ],
+            "no-unused-vars": "warn",
+            "object-curly-spacing": [
+                "error",
+                "always"
+            ],
+            "no-constant-condition": "off"
+        }
+    }
+}
