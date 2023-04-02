@@ -14,6 +14,7 @@ import NextNProgress from 'nextjs-progressbar';
 
 import { useColorScheme } from '@/hooks/useColorScheme';
 import { AuthProvider } from '@/store/auth/AuthProvider';
+import { TypeComponentAuthFields } from '@/types';
 
 import '@/styles/globals.css';
 
@@ -25,10 +26,13 @@ export const queryClient = new QueryClient({
   }
 });
 
-const App = (props: AppProps) => {
-  const { Component, pageProps, theme } = props as AppProps & {
+type TypeApp = AppProps &
+  TypeComponentAuthFields & {
     theme: ColorScheme;
   };
+
+const App = (props: TypeApp) => {
+  const { Component, pageProps, theme } = props;
 
   const { colorScheme, toggleColorScheme } = useColorScheme(theme);
 
@@ -52,7 +56,7 @@ const App = (props: AppProps) => {
         >
           <Notifications zIndex={2000} />
           <NextNProgress />
-          <AuthProvider>
+          <AuthProvider Component={Component}>
             <Component {...pageProps} />
           </AuthProvider>
         </MantineProvider>

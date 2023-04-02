@@ -65,12 +65,14 @@ const ProductsDetailsPage = observer(() => {
                 <Text>Описание:</Text>
                 <Text>{product.description}</Text>
               </Group>
-              <BasketAndLikedButtons
-                id={product.id}
-                isInBasket={isInBasket}
-                isInLiked={isInLiked}
-                {...basketAndLikedMethods}
-              />
+              <Group position='left'>
+                <BasketAndLikedButtons
+                  id={product.id}
+                  isInBasket={isInBasket}
+                  isInLiked={isInLiked}
+                  {...basketAndLikedMethods}
+                />
+              </Group>
             </Stack>
           </Flex>
         </>

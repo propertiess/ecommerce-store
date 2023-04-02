@@ -1,7 +1,9 @@
 import { PropsWithChildren, useEffect } from 'react';
 import { getCookie, hasCookie } from 'cookies-next';
 import { observer } from 'mobx-react-lite';
+import NotFound from 'pages/404';
 
+import { TypeComponentAuthFields } from '@/types';
 import { Storage } from '@/utils/api/storage';
 import { AuthEnum } from '@/utils/consts';
 
@@ -10,25 +12,33 @@ import { LikedProvider } from '../liked/LikedProvider';
 
 import { useAuthStore } from './Auth';
 
-type Props = PropsWithChildren;
+type Props = PropsWithChildren & TypeComponentAuthFields;
 
-export const AuthProvider = observer(({ children }: Props) => {
-  const { setUser } = useAuthStore();
+export const AuthProvider = observer(
+  ({ children, Component: { isOnlyUser } }: Props) => {
+    const { setUser, userId } = useAuthStore();
 
-  useEffect(() => {
-    if (!hasCookie(AuthEnum.TOKEN)) {
-      return;
+    useEffect(() => {
+      if (!hasCookie(AuthEnum.TOKEN)) {
+        return;
+      }
+
+      const userId = +Storage.getItem('user-id')!;
+      setUser(getCookie(AuthEnum.TOKEN) as string, userId);
+    }, [setUser]);
+
+    if (isOnlyUser && !userId) {
+      return (
+        <NotFound title='Страница доступна зарегистрированным пользователям.' />
+      );
     }
 
-    const userId = +Storage.getItem('user-id')!;
-    setUser(getCookie(AuthEnum.TOKEN) as string, userId);
-  }, [setUser]);
-
-  return (
-    <>
-      <BasketProvider>
-        <LikedProvider>{children}</LikedProvider>
-      </BasketProvider>
-    </>
-  );
-});
+    return (
+      <>
+        <BasketProvider>
+          <LikedProvider>{children}</LikedProvider>
+        </BasketProvider>
+      </>
+    );
+  }
+);

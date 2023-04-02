@@ -1,3 +1,5 @@
+import { NextPage } from 'next';
+
 import { QueryKeys } from '@/utils/consts';
 
 export type Product = {
@@ -36,4 +38,15 @@ export type AvailableTable = keyof typeof QueryKeys;
 export type TLink = {
   title: string;
   href: string;
+};
+
+// eslint-disable-next-line @typescript-eslint/ban-types
+export type NextPageWithAuth<P = {}> = NextPage<P> & {
+  isOnlyUser: boolean;
+};
+
+export type TypeComponentAuthFields = {
+  Component: {
+    isOnlyUser: boolean;
+  };
 };

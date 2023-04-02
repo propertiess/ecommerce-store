@@ -9,4 +9,6 @@ const Basket = () => {
   );
 };
 
+Basket.isOnlyUser = true;
+
 export default Basket;
