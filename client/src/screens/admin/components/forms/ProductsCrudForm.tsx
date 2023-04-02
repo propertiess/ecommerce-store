@@ -12,7 +12,7 @@ const schema = z.object({
   description: z
     .string()
     .min(10, { message: 'Описание товара должно иметь больше 10 символов' })
-    .max(100, { message: 'Описание товара должно быть меньше 100 символов' }),
+    .max(150, { message: 'Описание товара должно быть меньше 150 символов' }),
   img: z.string().url(),
   price: z
     .number()
