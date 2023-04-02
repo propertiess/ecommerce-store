@@ -1,7 +1,6 @@
 import { Button, Center, Group, Loader, Text } from '@mantine/core';
 import { observer } from 'mobx-react-lite';
 
-import { useBasketStore } from '@/store/basket/Basket';
 import { convertCurrency } from '@/utils/helpers/convertCurrency';
 
 import { useBasketList } from '../hooks/useBasketList';
@@ -9,9 +8,14 @@ import { useBasketList } from '../hooks/useBasketList';
 import { BasketItem } from './BasketItem';
 
 export const BasketList = observer(() => {
-  const { basket, percentDiscount } = useBasketStore();
-  const { basketItems, isFetching, totalPrice, totalPriceWithBonus } =
-    useBasketList(basket, percentDiscount);
+  const {
+    basket,
+    percentDiscount,
+    basketItems,
+    isFetching,
+    totalPrice,
+    totalPriceWithBonus
+  } = useBasketList();
 
   if (isFetching) {
     return (

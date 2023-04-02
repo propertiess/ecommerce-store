@@ -16,6 +16,16 @@ export const useGetProducts = () => {
   });
 };
 
+export const useGetProduct = (id?: number) => {
+  return useQuery({
+    queryKey: [QueryKeys.products, id],
+    queryFn: () => ProductService.get(id!),
+    onError: () => {
+      showErrorNotification('Не удалось получить данные!');
+    }
+  });
+};
+
 export const useProductsData = () => {
   return queryClient.getQueryData<Product[]>([QueryKeys.products]);
 };

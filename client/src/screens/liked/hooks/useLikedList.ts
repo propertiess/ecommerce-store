@@ -1,9 +1,10 @@
 import { useGetProducts } from '@/screens/home/hooks/useGetProducts';
-import { TLikedItem } from '@/store/liked/Liked';
+import { useLikedStore } from '@/store/liked/Liked';
 
 import { LikedItemProps } from '../components/LikedItem';
 
-export const useLikedList = (liked: TLikedItem[]) => {
+export const useLikedList = () => {
+  const { liked } = useLikedStore();
   const { data, isFetching } = useGetProducts();
 
   const likedItems = (liked || []).reduce(
@@ -22,6 +23,7 @@ export const useLikedList = (liked: TLikedItem[]) => {
   );
 
   return {
+    liked,
     likedItems,
     isFetching
   };

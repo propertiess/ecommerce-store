@@ -1,12 +1,10 @@
 import { useGetProducts } from '@/screens/home/hooks/useGetProducts';
-import { TBasketItem } from '@/store/basket/Basket';
+import { useBasketStore } from '@/store/basket/Basket';
 
 import { BasketItemProps } from '../components/BasketItem';
 
-export const useBasketList = (
-  basket: TBasketItem[],
-  percentDiscount: number
-) => {
+export const useBasketList = () => {
+  const { basket, percentDiscount } = useBasketStore();
   const { data, isFetching } = useGetProducts();
 
   const { basketItems, totalPrice } = (basket || []).reduce(
@@ -31,6 +29,8 @@ export const useBasketList = (
   const totalPriceWithBonus = (totalPrice * percentDiscount) / 100;
 
   return {
+    basket,
+    percentDiscount,
     basketItems,
     totalPrice,
     totalPriceWithBonus,

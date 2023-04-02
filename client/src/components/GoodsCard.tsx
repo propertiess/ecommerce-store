@@ -1,26 +1,14 @@
-import {
-  Button,
-  Card,
-  Center,
-  Group,
-  Stack,
-  Text,
-  Tooltip
-} from '@mantine/core';
+import { Card, Center, Flex, Stack, Text } from '@mantine/core';
 import Image from 'next/image';
-import {
-  HeartOff,
-  HeartPlus,
-  ShoppingCartOff,
-  ShoppingCartPlus
-} from 'tabler-icons-react';
 
 import { Product } from '@/types';
 import { convertCurrency } from '@/utils/helpers/convertCurrency';
 
-import { PromptTooltipOnDisabled } from './PromptTooltip';
+import { BasketAndLikedButtons } from './BasketAndLikedButtons';
+import { CutTooltip } from './CutTooltip';
 
 export type GoodsCardProps = Product & {
+  href?: string;
   withToolTip?: boolean;
   maxLengthTitle?: number;
   isInBasket: boolean;
@@ -41,6 +29,7 @@ export type GoodsCardPropsOften = Pick<
   | 'onCancelBasket'
   | 'onCancelLiked'
   | 'disabled'
+  | 'href'
 >;
 
 export const GoodsCard = ({
@@ -63,51 +52,37 @@ export const GoodsCard = ({
         </Stack>
       </Card.Section>
       <Center mt='md'>
-        {withToolTip && props.title.length > maxLengthTitle ? (
-          <Tooltip label={props.title}>
-            <Text weight={500}>
-              {props.title.slice(0, maxLengthTitle) + '...'}
-            </Text>
-          </Tooltip>
+        {props.href ? (
+          <CutTooltip
+            title={props.title}
+            length={maxLengthTitle}
+            withTooltip={withToolTip}
+            href={props.href}
+            as='a'
+          />
         ) : (
-          <Text weight={500}>{props.title}</Text>
+          <CutTooltip
+            title={props.title}
+            length={maxLengthTitle}
+            withTooltip={withToolTip}
+          />
         )}
       </Center>
-      <PromptTooltipOnDisabled
-        label='Для того чтобы добавить товар в корзину или избранное нужно зарегистрироваться!'
-        disabled={disabled}
-      >
-        <Group grow align='center' mt='md'>
-          <Text>{convertCurrency(props.price)}</Text>
 
-          <Button
-            variant='light'
-            color={props.isInLiked ? 'red' : 'blue'}
-            onClick={
-              props.isInLiked
-                ? () => props.onCancelLiked(props.id)
-                : () => props.onAddedToLiked(props.id)
-            }
-            radius='md'
-            disabled={disabled}
-          >
-            {props.isInLiked ? <HeartOff /> : <HeartPlus />}
-          </Button>
-          <Button
-            variant='light'
-            color={props.isInBasket ? 'red' : 'blue'}
-            onClick={
-              props.isInBasket
-                ? () => props.onCancelBasket(props.id)
-                : () => props.onAddedToBasket(props.id)
-            }
-            radius='md'
-            disabled={disabled}
-          >
-            {props.isInBasket ? <ShoppingCartOff /> : <ShoppingCartPlus />}
-          </Button>
-        </Group>
-      </PromptTooltipOnDisabled>
+      <Flex align='center' justify='space-between' mt='md'>
+        <Text>{convertCurrency(props.price)}</Text>
+
+        <BasketAndLikedButtons
+          id={props.id}
+          isInBasket={props.isInBasket}
+          isInLiked={props.isInLiked}
+          onAddedToBasket={props.onAddedToBasket}
+          onCancelBasket={props.onCancelBasket}
+          onAddedToLiked={props.onAddedToLiked}
+          onCancelLiked={props.onCancelLiked}
+          disabled={disabled}
+        />
+      </Flex>
     </Card>
   );
 };

@@ -9,8 +9,8 @@ import { useLikedList } from '../hooks/useLikedList';
 import { LikedItem } from './LikedItem';
 
 export const LikedList = observer(() => {
-  const { liked, removeItem } = useLikedStore();
-  const { likedItems, isFetching } = useLikedList(liked);
+  const { removeItem } = useLikedStore();
+  const { liked, likedItems, isFetching } = useLikedList();
 
   if (isFetching) {
     return <CenteredLoader />;

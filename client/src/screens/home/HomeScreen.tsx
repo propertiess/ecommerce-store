@@ -35,6 +35,7 @@ export const HomeScreen = observer(({ products }: Required<HomePageProps>) => {
         <Grid.Col key={product.id} span={12} xs={6} sm={4} xl={2}>
           <ProductCard
             product={product}
+            href={`/products/${product.id}`}
             isInBasket={!!basket.find(item => item.productId === product.id)}
             isInLiked={!!liked.find(item => item.productId === product.id)}
             onAddedToLiked={id => addItemToLiked({ productId: id })}

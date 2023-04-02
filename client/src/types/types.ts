@@ -6,7 +6,11 @@ export type Product = {
   price: number;
   description: string;
   img: string;
+  rating: number;
+  category: Category;
 };
+
+export type Category = 'MEN' | 'WOMEN';
 
 export type User = {
   id: number;
