@@ -3,10 +3,6 @@ import { makeAutoObservable } from 'mobx';
 import { OrderDto } from '@/services/order/order.dto';
 import { OrderService } from '@/services/order/order.service';
 import { Storage } from '@/utils/api/storage';
-import {
-  showErrorNotification,
-  showSuccessNotification
-} from '@/utils/helpers/notifications';
 
 export type TOrderItem = {
   status: string;
@@ -50,17 +46,17 @@ class Order {
 
     try {
       await OrderService.put(orderDto);
-      showSuccessNotification('Заказ успешно оформлен!');
+      // showSuccessNotification('Заказ успешно оформлен!');
       return true;
     } catch (e) {
       console.error(e);
       try {
         await OrderService.post(orderDto);
-        showSuccessNotification('Заказ успешно оформлен!');
+        // showSuccessNotification('Заказ успешно оформлен!');
         return true;
       } catch (e) {
         console.error(e);
-        showErrorNotification('Не удалось оформить заказ!');
+        // showErrorNotification('Не удалось оформить заказ!');
         return false;
       }
     }
