@@ -9,7 +9,6 @@ import {
 } from '@/utils/helpers/notifications';
 
 export type TOrderItem = {
-  id: number;
   status: string;
   totalPrice: number;
 };

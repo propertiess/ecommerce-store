@@ -5,7 +5,6 @@ import { observer } from 'mobx-react-lite';
 import { useBasketStore } from '@/store/basket/Basket';
 import { useOrderStore } from '@/store/order/Order';
 import { convertCurrency } from '@/utils/helpers/convertCurrency';
-import { getRandomNumber } from '@/utils/helpers/getRandomNumber';
 
 import { BasketList } from './components/BasketList';
 import { useBasketList } from './hooks/useBasketList';
@@ -22,7 +21,6 @@ export const BasketScreen = observer(() => {
     open();
 
     const isSuccessOrder = await addItem({
-      id: getRandomNumber(0, 1000),
       status: 'Buy',
       totalPrice: totalPriceWithBonus
     });
