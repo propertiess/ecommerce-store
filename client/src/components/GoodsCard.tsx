@@ -42,13 +42,14 @@ export const GoodsCard = ({
       <Card.Section pt='sm'>
         <Stack className='relative mx-auto h-52'>
           {props.href ? (
-            <A href={props.href}>
+            <A href={props.href} className='relative mx-auto h-52 w-52'>
               <Image
                 className='object-contain'
                 sizes='100%'
                 src={props.img}
                 alt={props.title}
                 fill={true}
+                priority={props.id < 4}
               />
             </A>
           ) : (
@@ -58,6 +59,7 @@ export const GoodsCard = ({
               src={props.img}
               alt={props.title}
               fill={true}
+              priority={props.id < 4}
             />
           )}
         </Stack>
