@@ -10,6 +10,7 @@ export const useGetProducts = () => {
   return useQuery({
     queryKey: [QueryKeys.products],
     queryFn: () => ProductService.getAll(),
+    staleTime: Infinity,
     onError: () => {
       showErrorNotification('Не удалось получить данные!');
     }
