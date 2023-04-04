@@ -9,16 +9,12 @@ export const useBasketAndLikedMethods = (): Omit<
 > => {
   const { userId } = useAuthStore();
 
-  const { addItem: addItemToBasket, removeItem: removeItemFromBasket } =
-    useBasketStore();
-  const { addItem: addItemToLiked, removeItem: removeItemFromLiked } =
-    useLikedStore();
+  const { toggleBasketItem } = useBasketStore();
+  const { toggleLikedItem } = useLikedStore();
 
   return {
-    onAddedToBasket: id => addItemToBasket({ productId: id, quantity: 1 }),
-    onAddedToLiked: id => addItemToLiked({ productId: id }),
-    onCancelBasket: id => removeItemFromBasket(id),
-    onCancelLiked: id => removeItemFromLiked(id),
+    toggleBasketItem,
+    toggleLikedItem,
     disabled: !userId
   };
 };

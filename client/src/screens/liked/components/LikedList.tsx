@@ -9,7 +9,7 @@ import { useLikedList } from '../hooks/useLikedList';
 import { LikedItem } from './LikedItem';
 
 export const LikedList = observer(() => {
-  const { removeItem } = useLikedStore();
+  const { toggleLikedItem } = useLikedStore();
   const { liked, likedItems, isFetching } = useLikedList();
 
   if (isFetching) {
@@ -26,7 +26,7 @@ export const LikedList = observer(() => {
                 key={productId}
                 {...likedItems[idx]}
                 productId={productId}
-                removeItem={removeItem}
+                removeItem={toggleLikedItem}
               />
             ))}
         </>

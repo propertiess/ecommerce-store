@@ -17,20 +17,24 @@ class Basket {
     makeAutoObservable(this);
   }
 
-  addItem = (item: TBasketItem) => {
-    this.basket.push(item);
+  toggleBasketItem = (item: TBasketItem) => {
+    const index = this.basket.findIndex(
+      basketItem => basketItem.productId === item.productId
+    );
+
+    if (index === -1) {
+      this.basket.push(item);
+      this.mutateBasket(this.basket);
+      return;
+    }
+
+    this.basket.splice(index, 1);
     this.mutateBasket(this.basket);
   };
 
   setItemQuantity = (productId: number, quantity: number) => {
     const index = this.basket.findIndex(item => item.productId === productId);
     this.basket[index].quantity = quantity;
-    this.mutateBasket(this.basket);
-  };
-
-  removeItem = (productId: number) => {
-    const index = this.basket.findIndex(item => item.productId === productId);
-    this.basket.splice(index, 1);
     this.mutateBasket(this.basket);
   };
 

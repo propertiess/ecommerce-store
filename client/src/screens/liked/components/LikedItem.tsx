@@ -8,7 +8,7 @@ import { convertCurrency } from '@/utils/helpers/convertCurrency';
 
 export type LikedItemProps = Omit<Product, 'id'> &
   TLikedItem & {
-    removeItem: (id: number) => void;
+    removeItem: (item: TLikedItem) => void;
   };
 
 export const LikedItem = (props: LikedItemProps) => {
@@ -33,7 +33,7 @@ export const LikedItem = (props: LikedItemProps) => {
           <Group position='right'>
             <Button
               variant='gradient'
-              onClick={() => props.removeItem(props.productId)}
+              onClick={() => props.removeItem({ productId: props.productId })}
             >
               <Minus />
             </Button>

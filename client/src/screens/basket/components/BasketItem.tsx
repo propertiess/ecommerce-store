@@ -10,11 +10,11 @@ import { convertCurrency } from '@/utils/helpers/convertCurrency';
 export type BasketItemProps = Omit<Product, 'id'> & TBasketItem;
 
 export const BasketItem = observer((props: BasketItemProps) => {
-  const { setItemQuantity, removeItem } = useBasketStore();
+  const { setItemQuantity, toggleBasketItem } = useBasketStore();
 
   const onMinusHandle = () => {
     if (props.quantity === 1) {
-      removeItem(props.productId);
+      toggleBasketItem({ productId: props.productId, quantity: 1 });
       return;
     }
 

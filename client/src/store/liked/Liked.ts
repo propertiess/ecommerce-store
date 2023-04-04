@@ -15,13 +15,17 @@ class Liked {
     makeAutoObservable(this);
   }
 
-  addItem = (item: TLikedItem) => {
-    this.liked.push(item);
-    this.mutateLiked(this.liked);
-  };
+  toggleLikedItem = (item: TLikedItem) => {
+    const index = this.liked.findIndex(
+      likedItem => likedItem.productId === item.productId
+    );
 
-  removeItem = (productId: number) => {
-    const index = this.liked.findIndex(item => item.productId === productId);
+    if (index === -1) {
+      this.liked.push(item);
+      this.mutateLiked(this.liked);
+      return;
+    }
+
     this.liked.splice(index, 1);
     this.mutateLiked(this.liked);
   };

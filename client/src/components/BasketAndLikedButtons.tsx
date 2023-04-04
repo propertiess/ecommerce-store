@@ -29,11 +29,7 @@ export const BasketAndLikedButtons = (props: Props) => {
           <Button
             variant='light'
             color={props.isInLiked ? 'red' : 'blue'}
-            onClick={
-              props.isInLiked
-                ? () => props.onCancelLiked(props.id)
-                : () => props.onAddedToLiked(props.id)
-            }
+            onClick={() => props.toggleLikedItem({ productId: props.id })}
             radius='md'
             disabled={props.disabled}
           >
@@ -51,10 +47,8 @@ export const BasketAndLikedButtons = (props: Props) => {
           <Button
             variant='light'
             color={props.isInBasket ? 'red' : 'blue'}
-            onClick={
-              props.isInBasket
-                ? () => props.onCancelBasket(props.id)
-                : () => props.onAddedToBasket(props.id)
+            onClick={() =>
+              props.toggleBasketItem({ productId: props.id, quantity: 1 })
             }
             radius='md'
             disabled={props.disabled}

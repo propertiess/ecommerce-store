@@ -1,6 +1,8 @@
 import { Card, Center, Group, Rating, Stack, Text } from '@mantine/core';
 import Image from 'next/image';
 
+import { TBasketItem } from '@/store/basket/Basket';
+import { TLikedItem } from '@/store/liked/Liked';
 import { Product } from '@/types';
 import { convertCurrency } from '@/utils/helpers/convertCurrency';
 
@@ -14,10 +16,8 @@ export type GoodsCardProps = Product & {
   maxLengthTitle?: number;
   isInBasket: boolean;
   isInLiked: boolean;
-  onAddedToBasket: (id: number) => void;
-  onCancelBasket: (id: number) => void;
-  onAddedToLiked: (id: number) => void;
-  onCancelLiked: (id: number) => void;
+  toggleBasketItem: (item: TBasketItem) => void;
+  toggleLikedItem: (item: TLikedItem) => void;
   disabled?: boolean;
 };
 
@@ -25,10 +25,8 @@ export type GoodsCardPropsOften = Pick<
   GoodsCardProps,
   | 'isInBasket'
   | 'isInLiked'
-  | 'onAddedToBasket'
-  | 'onAddedToLiked'
-  | 'onCancelBasket'
-  | 'onCancelLiked'
+  | 'toggleBasketItem'
+  | 'toggleLikedItem'
   | 'disabled'
   | 'href'
 >;
@@ -95,10 +93,8 @@ export const GoodsCard = ({
           id={props.id}
           isInBasket={props.isInBasket}
           isInLiked={props.isInLiked}
-          onAddedToBasket={props.onAddedToBasket}
-          onCancelBasket={props.onCancelBasket}
-          onAddedToLiked={props.onAddedToLiked}
-          onCancelLiked={props.onCancelLiked}
+          toggleBasketItem={props.toggleBasketItem}
+          toggleLikedItem={props.toggleLikedItem}
           disabled={disabled}
         />
       </Group>
